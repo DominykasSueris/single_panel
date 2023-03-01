@@ -1,14 +1,18 @@
 /** Utils */
 import { IAwsLogs, IAwsLogGroups, IAwsStreams } from "../../services/aws/spec";
+import AlertEmpty from "../Alert/AlertEmpty";
 
-interface ITableProps {
+interface Props {
   headers: string[];
   items: IAwsLogs[] | IAwsLogGroups[] | IAwsStreams[];
   resourceName: string;
   itemComponent: React.FC;
 }
 
-const Table = ({ headers, items, itemComponent: ItemComponent, resourceName }: ITableProps) => {
+const Table = ({ headers, items, itemComponent: ItemComponent, resourceName }: Props) => {
+  if (!items.length) 
+    return <AlertEmpty />
+
   return (
     <div className="container pb-5">
       <table className="table table-bordered">
