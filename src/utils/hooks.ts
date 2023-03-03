@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Watch } from "watch-land-ts-client/dist/lib/watch";
+import { AwsModel } from "../services/aws/spec";
 /**
  *
  * @returns void
@@ -10,7 +11,7 @@ export const useQuery = () => {
   return React.useMemo(() => new URLSearchParams(search), [search]);
 };
 
-type CloudWatchType = <Type>(watch: Watch) => { data: Type[], loading: Boolean, error: Boolean};
+type CloudWatchType = <Type extends AwsModel>(watch: Watch) => { data: Type[], loading: Boolean, error: Boolean};
 
 export const useCloudWatch: CloudWatchType = <Type>(watch: Watch) => {
   const [loading, setLoading] = useState<Boolean>(false)
