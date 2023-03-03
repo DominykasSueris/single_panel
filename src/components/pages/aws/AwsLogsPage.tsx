@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import AlertEmpty from "../../components/alerts/AlertEmpty";
-import AlertError from "../../components/alerts/AlertError";
-import BackButton from "../../components/Buttons/BackButton";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import Spinner from "../../components/Spinner/Spinner";
-import AwsLogRow from "../../components/table/models/AwsLogRow";
-import Table from "../../components/table/Table";
-import { updateLoadingState } from "../../redux/reducers/loading";
-import { RootState } from "../../redux/store";
-import { CloudWatch } from "../../services/aws/aws";
-import { AwsLog } from "../../services/aws/spec";
-import { useQuery } from "../../utils";
+import AlertEmpty from "../../alerts/AlertEmpty";
+import AlertError from "../../alerts/AlertError";
+import BackButton from "../../Buttons/BackButton";
+import SearchBar from "../../SearchBar/SearchBar";
+import Spinner from "../../Spinner/Spinner";
+import AwsLogRow from "../../table/models/AwsLogRow";
+import Table from "../../table/Table";
+import { updateLoadingState } from "../../../redux/reducers/loading";
+import { RootState } from "../../../redux/store";
+import { CloudWatch } from "../../../services/aws/aws";
+import { AwsLog } from "../../../services/aws/spec";
+import { useQuery } from "../../../utils";
 
 
 const AwsLogsPage = () => {

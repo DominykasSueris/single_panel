@@ -1,13 +1,13 @@
 import { useState } from "react";
-import AlertError from "../../components/alerts/AlertError";
-import BackButton from "../../components/Buttons/BackButton";
-import SearchBar from "../../components/SearchBar/SearchBarv2";
-import Spinner from "../../components/Spinner/Spinner";
-import AwsGroupsRow from "../../components/table/models/AwsGroupRow";
-import Table from "../../components/table/Table";
-import { CloudWatch } from "../../services/aws/aws";
-import { AwsLogGroup } from "../../services/aws/spec";
-import { useCloudWatch } from "../../utils/hooks";
+import AlertError from "../../alerts/AlertError";
+import BackButton from "../../Buttons/BackButton";
+import SearchBar from "../../SearchBar/SearchBarv2";
+import Spinner from "../../Spinner/Spinner";
+import AwsGroupsRow from "../../table/models/AwsGroupRow";
+import Table from "../../table/Table";
+import { CloudWatch } from "../../../services/aws/aws";
+import { AwsLogGroup } from "../../../services/aws/spec";
+import { useCloudWatch } from "../../../utils/hooks";
 
 const AwsGroupsPage = () => {
   const { data: groups, loading, error } = useCloudWatch<AwsLogGroup>(CloudWatch.groups())

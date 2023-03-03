@@ -2,24 +2,24 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 /** Redux */
-import { RootState } from "../../redux/store";
-import { updateLoadingState } from "../../redux/reducers/loading";
+import { RootState } from "../../../redux/store";
+import { updateLoadingState } from "../../../redux/reducers/loading";
 
 /** Cloud Services */
-import { CloudWatch } from "../../services/aws/aws";
-import { AwsStream } from "../../services/aws/spec";
+import { CloudWatch } from "../../../services/aws/aws";
+import { AwsStream } from "../../../services/aws/spec";
 
 /** Components  */
-import BackButton from "../../components/Buttons/BackButton";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import AlertEmpty from "../../components/alerts/AlertEmpty";
-import AlertError from "../../components/alerts/AlertError";
-import Spinner from "../../components/Spinner/Spinner";
-import Table from "../../components/table/Table";
-import AwsStreamsRow from "../../components/table/models/AwsStreamRow";
+import BackButton from "../../Buttons/BackButton";
+import SearchBar from "../../SearchBar/SearchBar";
+import AlertEmpty from "../../alerts/AlertEmpty";
+import AlertError from "../../alerts/AlertError";
+import Spinner from "../../Spinner/Spinner";
+import Table from "../../table/Table";
+import AwsStreamsRow from "../../table/models/AwsStreamRow";
 
 /** Utils */
-import { useQuery } from "../../utils/hooks";
+import { useQuery } from "../../../utils/hooks";
 
 const AwsStreamsPage = () => {
   const dispatch = useDispatch();

@@ -2,17 +2,17 @@ import { Route, Routes } from "react-router-dom";
 import "./WatchLand.scss";
 
 /**Components */
-import HomePage from "./pages/HomePage";
+import HomePage from "./components/pages/HomePage";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Auth/Login";
 import AwsAuth from "./components/Providers/AWS/AwsAuth";
 import AwsAccounts from "./components/Providers/AWS/AwsAccounts";
-import AwsStreamsPage from "./pages/aws/AwsStreamsPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import AwsStreamsPage from "./components/pages/aws/AwsStreamsPage";
+import NotFoundPage from "./components/pages/NotFoundPage";
 import Azure from "./components/Providers/Azure/Azure";
 import GoogleCloud from "./components/Providers/gCloud/GoogleCloud";
-import AwsGroupsPage from "./pages/aws/AwsGroupsPage";
-import AwsLogsPage from "./pages/aws/AwsLogsPage";
+import AwsGroupsPage from "./components/pages/aws/AwsGroupsPage";
+import AwsLogsPage from "./components/pages/aws/AwsLogsPage";
 
 const WatchLand = () => {
   return (
