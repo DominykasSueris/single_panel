@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import "./HomePage.scss";
-import { ReactComponent as AwsLogo } from '../../assets/logos/aws.svg';
-import { ReactComponent as AzureLogo } from '../../assets/logos/azure.svg';
-import { ReactComponent as GCloudLogo } from '../../assets/logos/gcloud.svg';
+import "../scss/HomePage.scss";
+import { ReactComponent as AwsLogo } from '../assets/logos/aws.svg';
+import { ReactComponent as AzureLogo } from '../assets/logos/azure.svg';
+import { ReactComponent as GCloudLogo } from '../assets/logos/gcloud.svg';
 
 
 const HomePage = () => {

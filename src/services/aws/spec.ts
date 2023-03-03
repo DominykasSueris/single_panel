@@ -1,17 +1,14 @@
-export interface IAwsProvider {
-  groups(): Promise<IAwsLogGroups[] | []>;
-  streams(groupName: string): Promise<IAwsStreams[] | []>;
-  logs(grouName: string, streams: string[]): Promise<IAwsLogs[] | []>;
-}
-
-export interface IAwsLogGroups {
-  logGroupName: string;
-  creationTime: number;
-  metricFilterCount: number;
+export interface AwsModel {
   arn: string;
 }
 
-export interface IAwsStreams {
+export interface AwsLogGroup extends AwsModel {
+  logGroupName: string;
+  creationTime: number;
+  metricFilterCount: number;
+}
+
+export interface AwsStream extends AwsModel {
   logStreamName: string;
   creationTime: number;
   firstEventTimestamp: number;
@@ -19,11 +16,10 @@ export interface IAwsStreams {
   lastIngestionTime: number;
   uploadSequenceToken: string;
   groupName: string;
-  arn: string;
   storedBytes: number;
 }
 
-export interface IAwsLogs {
+export interface AwsLog extends AwsModel {
   logStreamName: string;
   timestamp: number;
   message: string;

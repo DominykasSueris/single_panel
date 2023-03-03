@@ -1,21 +1,16 @@
-/** Cloud Services */
-import { CloudWatch } from "../../../services/aws/aws";
-
-/** Components  */
-import BackButton from "../../Buttons/BackButton";
-import Spinner from "../../Spinner/Spinner";
-import AlertError from "../../Alert/AlertError";
-import Table from "../../Table/Table";
-import AwsGroupsRow from "../../Table/AwsTableRows/AwsGroupsRow";
-
-/** Utils */
-import { useCloudWatch } from "../../../utils/hooks";
-import SearchBar from "../../SearchBar/SearchBarv2";
-import { IAwsLogGroups } from "../../../services/aws/spec";
 import { useState } from "react";
+import AlertError from "../../components/Alert/AlertError";
+import BackButton from "../../components/Buttons/BackButton";
+import SearchBar from "../../components/SearchBar/SearchBarv2";
+import Spinner from "../../components/Spinner/Spinner";
+import AwsGroupsRow from "../../components/table/models/AwsGroupRow";
+import Table from "../../components/table/Table";
+import { CloudWatch } from "../../services/aws/aws";
+import { AwsLogGroup } from "../../services/aws/spec";
+import { useCloudWatch } from "../../utils/hooks";
 
-const AwsGroups = () => {
-  const { data: groups, loading, error } = useCloudWatch<IAwsLogGroups>(CloudWatch.groups())
+const AwsGroupsPage = () => {
+  const { data: groups, loading, error } = useCloudWatch<AwsLogGroup>(CloudWatch.groups())
   const [filterQuery, setFilterQuery] = useState<string>("")
 
   const filterByGroupName = (groupName: string) => {
@@ -46,4 +41,4 @@ const AwsGroups = () => {
   );
 };
 
-export default AwsGroups;
+export default AwsGroupsPage;

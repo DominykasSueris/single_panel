@@ -1,12 +1,12 @@
 /** Utils */
 import { useMemo, useState } from "react";
-import { IAwsLogs, IAwsLogGroups, IAwsStreams } from "../../services/aws/spec";
+import { AwsLog, AwsLogGroup, AwsStream } from "../../services/aws/spec";
 import AlertEmpty from "../Alert/AlertEmpty";
 import Pagination from "./Pagination";
 
 interface Props {
   headers: string[];
-  items: IAwsLogs[] | IAwsLogGroups[] | IAwsStreams[];
+  items: AwsLog[] | AwsLogGroup[] | AwsStream[];
   resourceName: string;
   itemComponent: React.FC;
   pageSize?: number

@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 
 /** Utils */
-import { IAwsStreams } from "../../../services/aws/spec";
+import { AwsStream } from "../../../services/aws/spec";
 import { timestampToDate } from "../../../utils/dates";
 
-interface IAwsStreamRow {
-  stream?: IAwsStreams;
+interface Props {
+  stream?: AwsStream;
 }
 
-const AwsStreamsRow = ({ stream }: IAwsStreamRow) => {
+const AwsStreamsRow = ({ stream }: Props) => {
   return (
     <>
       {stream ? (

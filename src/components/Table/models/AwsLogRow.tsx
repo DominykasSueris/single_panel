@@ -1,16 +1,16 @@
 import { useState } from "react";
 
 /** Utils */
-import { IAwsLogs } from "../../../services/aws/spec";
+import { AwsLog } from "../../../services/aws/spec";
 import { timestampToDate } from "../../../utils/dates";
 
 import { ReactComponent as ArrowLogo } from "../../../assets/arrow/arrow.svg";
 
-interface IAwsLogsRow {
-  log?: IAwsLogs;
+interface Props {
+  log?: AwsLog;
 }
 
-const AwsLogsRow = ({ log }: IAwsLogsRow) => {
+const AwsLogsRow = ({ log }: Props) => {
   const [open, setOpen] = useState<Boolean>(false);
 
   const toggle = () => {

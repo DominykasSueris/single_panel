@@ -1,29 +1,23 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-/** Redux */
-import { RootState } from "../../../redux/store";
-import { updateLoadingState } from "../../../redux/reducers/loading";
+import AlertEmpty from "../../components/Alert/AlertEmpty";
+import AlertError from "../../components/Alert/AlertError";
+import BackButton from "../../components/Buttons/BackButton";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import Spinner from "../../components/Spinner/Spinner";
+import AwsLogRow from "../../components/table/models/AwsLogRow";
+import Table from "../../components/table/Table";
+import { updateLoadingState } from "../../redux/reducers/loading";
+import { RootState } from "../../redux/store";
+import { CloudWatch } from "../../services/aws/aws";
+import { AwsLog } from "../../services/aws/spec";
+import { useQuery } from "../../utils";
 
-/** Cloud Services */
-import { CloudWatch } from "../../../services/aws/aws";
-import { IAwsLogs } from "../../../services/aws/spec";
 
-/** Components  */
-import SearchBar from "../../SearchBar/SearchBar";
-import Spinner from "../../Spinner/Spinner";
-import AlertEmpty from "../../Alert/AlertEmpty";
-import AlertError from "../../Alert/AlertError";
-import BackButton from "../../Buttons/BackButton";
-import Table from "../../Table/Table";
-import AwsLogsRow from "../../Table/AwsTableRows/AwsLogsRow";
-
-/** Utils */
-import { useQuery } from "../../../utils/";
-
-const AwsLogs = () => {
+const AwsLogsPage = () => {
   const dispatch = useDispatch();
   const groupName = useQuery().get("group") || "";
-  const [logs, setLogs] = useState<IAwsLogs[]>([]);
+  const [logs, setLogs] = useState<AwsLog[]>([]);
   const [empty, setEmpty] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const stateLoading = useSelector((state: RootState) => state.loading.loading);
@@ -37,7 +31,7 @@ const AwsLogs = () => {
   };
 
   const loadLogs = async (searchPattern: string | undefined = undefined) => {
-    let dataLogs: IAwsLogs[] = [];
+    let dataLogs: AwsLog[] = [];
     const logGroups = [{ group: groupName }];
     setLoading(true);
     CloudWatch.logs(logGroups, { start: startDate, end: endDate, pattern: searchPattern })
@@ -79,7 +73,7 @@ const AwsLogs = () => {
             <>
               <Table
                 headers={["Log stream name", "Message", "Timestamp"]}
-                itemComponent={AwsLogsRow}
+                itemComponent={AwsLogRow}
                 items={logs}
                 resourceName="log"
               />
@@ -91,4 +85,4 @@ const AwsLogs = () => {
   );
 };
 
-export default AwsLogs;
+export default AwsLogsPage;

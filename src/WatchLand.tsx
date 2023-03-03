@@ -2,17 +2,17 @@ import { Route, Routes } from "react-router-dom";
 import "./WatchLand.scss";
 
 /**Components */
-import HomePage from "./components/HomePage/HomePage";
+import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Auth/Login";
 import AwsAuth from "./components/Providers/AWS/AwsAuth";
 import AwsAccounts from "./components/Providers/AWS/AwsAccounts";
-import AwsGroups from "./components/Providers/AWS/AwsGroups";
-import AwsStreams from "./components/Providers/AWS/AwsStreams";
-import AwsLogs from "./components/Providers/AWS/AwsLogs";
+import AwsStreamsPage from "./pages/aws/AwsStreamsPage";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 import Azure from "./components/Providers/Azure/Azure";
 import GoogleCloud from "./components/Providers/gCloud/GoogleCloud";
+import AwsGroupsPage from "./pages/aws/AwsGroupsPage";
+import AwsLogsPage from "./pages/aws/AwsLogsPage";
 
 const WatchLand = () => {
   return (
@@ -25,9 +25,9 @@ const WatchLand = () => {
           <Route path="/aws">
             <Route element={<AwsAuth />}>
               <Route index element={<AwsAccounts />}></Route>
-              <Route path="groups" element={<AwsGroups />}></Route>
-              <Route path="streams" element={<AwsStreams />}></Route>
-              <Route path="logs" element={<AwsLogs />}></Route>
+              <Route path="groups" element={<AwsGroupsPage />}></Route>
+              <Route path="streams" element={<AwsStreamsPage />}></Route>
+              <Route path="logs" element={<AwsLogsPage />}></Route>
             </Route>
           </Route>
           <Route path="/login" element={<Login />}></Route>
