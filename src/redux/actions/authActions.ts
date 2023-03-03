@@ -4,7 +4,6 @@ import {
   IAuthAction,
   IAuthActionDisconnect,
   IAuthConnectionAction,
-  IAuthState,
   IProfile
 } from "../specs/authSpecs";
 
