@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { AuthTarget } from "../../../redux/specs/authSpecs";
 import { RootState } from "../../../redux/store";
-import ComingSoonAlert from "../../Alert/AlertComingSoon";
+import ComingSoonAlert from "../../alerts/AlertComingSoon";
 
 const Azure = () => {
   const isAuth = useSelector((state: RootState) => {

@@ -1,7 +1,7 @@
 /** Utils */
 import { useMemo, useState } from "react";
 import { AwsLog, AwsLogGroup, AwsStream } from "../../services/aws/spec";
-import AlertEmpty from "../Alert/AlertEmpty";
+import AlertEmpty from "../alerts/AlertEmpty";
 import Pagination from "./Pagination";
 
 interface Props {

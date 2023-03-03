@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import AlertEmpty from "../../components/Alert/AlertEmpty";
-import AlertError from "../../components/Alert/AlertError";
+import AlertEmpty from "../../components/alerts/AlertEmpty";
+import AlertError from "../../components/alerts/AlertError";
 import BackButton from "../../components/Buttons/BackButton";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Spinner from "../../components/Spinner/Spinner";

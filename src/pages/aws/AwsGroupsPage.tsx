@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AlertError from "../../components/Alert/AlertError";
+import AlertError from "../../components/alerts/AlertError";
 import BackButton from "../../components/Buttons/BackButton";
 import SearchBar from "../../components/SearchBar/SearchBarv2";
 import Spinner from "../../components/Spinner/Spinner";

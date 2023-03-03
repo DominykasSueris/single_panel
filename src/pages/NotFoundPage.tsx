@@ -1,5 +1,5 @@
-import "./NotFoundPage.scss";
-import { ReactComponent as NotFoundPageLogo } from "../../assets/notFoundPageLogo/notFoundPageLogo.svg";
+import "src/scss/NotFoundPage.scss"
+import { ReactComponent as NotFoundPageLogo } from "src/assets/notFoundPageLogo/notFoundPageLogo.svg"
 
 const NotFoundPage = () => {
   return (

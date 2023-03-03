@@ -8,7 +8,7 @@ import Login from "./components/Auth/Login";
 import AwsAuth from "./components/Providers/AWS/AwsAuth";
 import AwsAccounts from "./components/Providers/AWS/AwsAccounts";
 import AwsStreamsPage from "./pages/aws/AwsStreamsPage";
-import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import Azure from "./components/Providers/Azure/Azure";
 import GoogleCloud from "./components/Providers/gCloud/GoogleCloud";
 import AwsGroupsPage from "./pages/aws/AwsGroupsPage";

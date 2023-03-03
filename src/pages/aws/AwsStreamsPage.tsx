@@ -12,8 +12,8 @@ import { AwsStream } from "../../services/aws/spec";
 /** Components  */
 import BackButton from "../../components/Buttons/BackButton";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import AlertEmpty from "../../components/Alert/AlertEmpty";
-import AlertError from "../../components/Alert/AlertError";
+import AlertEmpty from "../../components/alerts/AlertEmpty";
+import AlertError from "../../components/alerts/AlertError";
 import Spinner from "../../components/Spinner/Spinner";
 import Table from "../../components/table/Table";
 import AwsStreamsRow from "../../components/table/models/AwsStreamRow";
