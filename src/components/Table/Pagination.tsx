@@ -23,10 +23,7 @@ const Pagination = ({ activePage, setActivePage, pageCount }: Props) => {
         const p = pageKey + 1;
         return (
           <li className={`page-item ${activePage === p ? "active" : ""}`}>
-            <a
-              className="page-link"
-              href="#"
-              onClick={() => setActivePage(p)}>
+            <a className="page-link" href="#" onClick={() => setActivePage(p)}>
               {p}
             </a>
           </li>
