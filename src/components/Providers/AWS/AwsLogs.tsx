@@ -10,7 +10,6 @@ import { IAwsLogs } from "../../../services/aws/spec";
 
 /** Components  */
 import SearchBar from "../../SearchBar/SearchBar";
-import Pagination from "../../Pagination/Pagination";
 import Spinner from "../../Spinner/Spinner";
 import AlertEmpty from "../../Alert/AlertEmpty";
 import AlertError from "../../Alert/AlertError";
@@ -19,12 +18,11 @@ import Table from "../../Table/Table";
 import AwsLogsRow from "../../Table/AwsTableRows/AwsLogsRow";
 
 /** Utils */
-import { arrays, useQuery } from "../../../utils/";
+import { useQuery } from "../../../utils/";
 
 const AwsLogs = () => {
   const dispatch = useDispatch();
   const groupName = useQuery().get("group") || "";
-  const page = Number(useQuery().get("page") || "1");
   const [logs, setLogs] = useState<IAwsLogs[]>([]);
   const [empty, setEmpty] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
@@ -85,7 +83,6 @@ const AwsLogs = () => {
                 items={logs}
                 resourceName="log"
               />
-              <Pagination active={page} pageCount={arrays.getNumberOfPages(logs)} />
             </>
           )}
         </>

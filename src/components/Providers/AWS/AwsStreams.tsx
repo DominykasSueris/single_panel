@@ -12,7 +12,6 @@ import { IAwsStreams } from "../../../services/aws/spec";
 /** Components  */
 import BackButton from "../../Buttons/BackButton";
 import SearchBar from "../../SearchBar/SearchBar";
-import Pagination from "../../Pagination/Pagination";
 import AlertEmpty from "../../Alert/AlertEmpty";
 import AlertError from "../../Alert/AlertError";
 import Spinner from "../../Spinner/Spinner";
@@ -21,11 +20,9 @@ import AwsStreamsRow from "../../Table/AwsTableRows/AwsStreamsRow";
 
 /** Utils */
 import { useQuery } from "../../../utils/hooks";
-import { arrays } from "../../../utils/";
 
 const AwsStreams = () => {
   const dispatch = useDispatch();
-  const page = Number(useQuery().get("page") || "1");
   const groupName = useQuery().get("group") || "";
   const [streams, setStreams] = useState<IAwsStreams[]>([]);
   const [filteredStreams, setFilteredStreams] = useState<IAwsStreams[]>([]);
@@ -92,7 +89,6 @@ const AwsStreams = () => {
                 items={streams}
                 resourceName="stream"
               />,
-              <Pagination active={page} pageCount={arrays.getNumberOfPages(filteredStreams)} />
             ]
           )}
         </>

@@ -1,16 +1,27 @@
 /** Utils */
+import { useMemo, useState } from "react";
 import { IAwsLogs, IAwsLogGroups, IAwsStreams } from "../../services/aws/spec";
 import AlertEmpty from "../Alert/AlertEmpty";
+import Pagination from "./Pagination";
 
 interface Props {
   headers: string[];
   items: IAwsLogs[] | IAwsLogGroups[] | IAwsStreams[];
   resourceName: string;
   itemComponent: React.FC;
+  pageSize?: number
 }
 
-const Table = ({ headers, items, itemComponent: ItemComponent, resourceName }: Props) => {
-  if (!items.length) 
+const Table = ({ headers, items, itemComponent: ItemComponent, resourceName, pageSize = 10 }: Props) => {
+  const [currentPage, setCurrentPage] = useState<number>(1)
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
+    return items.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
+
+  if (!items.length)
     return <AlertEmpty />
 
   return (
@@ -24,11 +35,12 @@ const Table = ({ headers, items, itemComponent: ItemComponent, resourceName }: P
           </tr>
         </thead>
         <tbody>
-          {items.map((item, i) => (
+          {currentTableData.map((item, i) => (
             <ItemComponent key={i} {...{ [resourceName]: item }} />
           ))}
         </tbody>
       </table>
+      <Pagination activePage={currentPage} setActivePage={setCurrentPage} pageCount={Math.ceil(items.length / pageSize)} />
     </div>
   );
 };
