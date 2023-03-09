@@ -15,7 +15,7 @@ const Pagination = ({ active, pageCount }: IPaginationProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const goToPage = (p: number) => {
-    let params = new URLSearchParams();
+    const params = new URLSearchParams();
     params.set("page", `${p}`);
     searchParams.forEach((value, key) => {
       // Check that the key is not already present

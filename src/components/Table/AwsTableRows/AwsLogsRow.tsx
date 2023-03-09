@@ -13,7 +13,7 @@ interface IAwsLogsRow {
 }
 
 const AwsLogsRow = ({ log }: IAwsLogsRow) => {
-  const [open, setOpen] = useState<Boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const toggle = () => {
     setOpen(current => !current);

@@ -41,7 +41,7 @@ const Login = ({ isAuth }: LoginProps) => {
 
     let isConnected = false;
 
-    let loginData: IProfile = {
+    const loginData: IProfile = {
       id: uuid.v4(),
       type: profile,
       provider: authTarget,
@@ -60,8 +60,8 @@ const Login = ({ isAuth }: LoginProps) => {
       return;
     }
 
-    let watchers = CloudWatch.listWatchers();
-    let tag = watchers[watchers.length - 1];
+    const watchers = CloudWatch.listWatchers();
+    const tag = watchers[watchers.length - 1];
     loginData.tag = tag;
 
     AuthSessions.updateMethods(loginData);
