@@ -7,7 +7,7 @@ import * as uuid from "uuid";
 /** Redux */
 import { cloudConnect } from "../../redux/reducers/auth";
 import { AuthTarget, IProfile, AuthRegion } from "redux/specs/authSpecs";
-import { Connect } from "../../redux/actions/authActions";
+import { Connect } from "redux/actions/authActions";
 
 /** Cloud Services */
 import { configClient } from "../../services/aws/aws";
