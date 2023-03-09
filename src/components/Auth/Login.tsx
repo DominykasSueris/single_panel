@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import * as uuid from "uuid";
 
 /** Redux */
-import { cloudConnect } from "../../redux/reducers/auth";
+import { cloudConnect } from "redux/reducers/auth";
 import { AuthTarget, IProfile, AuthRegion } from "redux/specs/authSpecs";
 import { Connect } from "redux/actions/authActions";
 
@@ -14,7 +14,7 @@ import { configClient } from "services/aws/aws";
 import { CloudWatch } from "services/aws/aws";
 
 /** Services */
-import { AuthSessions } from "../../services/AuthSessions";
+import { AuthSessions } from "services/AuthSessions";
 
 export enum WLDevProfiles {
   Dev = "dev",
