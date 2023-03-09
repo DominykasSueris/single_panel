@@ -1,21 +1,21 @@
 import { useState } from "react";
 
 /** Cloud Services */
-import { CloudWatch } from "../../../services/aws/aws";
-import { IAwsLogs } from "../../../services/aws/spec";
+import { CloudWatch } from "services/aws/aws";
+import { IAwsLogs } from "services/aws/spec";
 
 /** Components  */
-import SearchBar from "../../SearchBar/SearchBar";
-// import Pagination from "../../Pagination/Pagination";
-import Spinner from "../../Spinner/Spinner";
-import AlertError from "../../Alert/AlertError";
-import BackButton from "../../Buttons/BackButton";
-import Table from "../../Table/Table";
-import AwsLogsRow from "../../Table/AwsTableRows/AwsLogsRow";
+import SearchBar from "components/SearchBar/SearchBar";
+// import Pagination from "components/Pagination/Pagination";
+import Spinner from "components/Spinner/Spinner";
+import AlertError from "components/Alert/AlertError";
+import BackButton from "components/Buttons/BackButton";
+import Table from "components/Table/Table";
+import AwsLogsRow from "components/Table/AwsTableRows/AwsLogsRow";
 
 /** Utils */
-// import { getNumberOfPages } from "../../../utils/dates";
-import { useCloudWatch, useQuery } from "../../../utils/hooks";
+// import { getNumberOfPages } from "utils/dates";
+import { useCloudWatch, useQuery } from "utils/hooks";
 
 const AwsLogs = () => {
   const groupName = useQuery().get("group") || "";

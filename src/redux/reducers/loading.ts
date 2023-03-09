@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ILoadingState, ILoadingAction } from "../specs/loadingSpecs";
+import { ILoadingState, ILoadingAction } from "redux/specs/loadingSpecs";
 
 const initialState: ILoadingState = {
   loading: false

@@ -1,11 +1,10 @@
 import { useState } from "react";
+import { ReactComponent as ArrowLogo } from "assets/arrow/arrow.svg";
 import "./AwsLogsRow.scss";
 
 /** Utils */
-import { IAwsLogs } from "../../../services/aws/spec";
-import { timestampToDate } from "../../../utils/dates";
-
-import { ReactComponent as ArrowLogo } from "../../../assets/arrow/arrow.svg";
+import { IAwsLogs } from "services/aws/spec";
+import { timestampToDate } from "utils/dates";
 
 interface IAwsLogsRow {
   log?: IAwsLogs;

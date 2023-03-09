@@ -3,20 +3,20 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
 /** Redux */
-import { RootState } from "../../../redux/store";
-import { AuthTarget, IProfile } from "../../../redux/specs/authSpecs";
+import { RootState } from "redux/store";
+import { AuthTarget, IProfile } from "redux/specs/authSpecs";
 
 /** Cloud Services */
-import { configClient } from "../../../services/aws/aws";
+import { configClient } from "services/aws/aws";
 
 /** Components  */
-import Login from "../../Auth/Login";
-import Spinner from "../../Spinner/Spinner";
+import Login from "components/Auth/Login";
+import Spinner from "components/Spinner/Spinner";
 
 /** Utils */
-import { AuthSessions } from "../../Auth/AuthSessions";
+import { AuthSessions } from "components/Auth/AuthSessions";
 
-const AwsAuth = (props: any) => {
+const AwsAuth = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [loading, setLoading] = useState(true);
   const auth = useSelector((state: RootState) => {

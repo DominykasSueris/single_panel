@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 /** Utils */
-import { IAwsLogGroups } from "../../../services/aws/spec";
-import { timestampToDate } from "../../../utils/dates";
+import { IAwsLogGroups } from "services/aws/spec";
+import { timestampToDate } from "utils/dates";
 
 interface IAwsGroupRow {
   group?: IAwsLogGroups;

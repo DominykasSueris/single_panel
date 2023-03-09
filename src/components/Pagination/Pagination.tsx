@@ -1,6 +1,8 @@
-import { useQuery } from "../../utils/hooks";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
+
+/** Utils */
+import { useQuery } from "utils/hooks";
 
 interface IPaginationProps {
   active: number;

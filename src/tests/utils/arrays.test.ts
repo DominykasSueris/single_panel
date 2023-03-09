@@ -1,4 +1,4 @@
-import { getNumberOfPages, sliceArray } from "../../utils/arrays";
+import { getNumberOfPages, sliceArray } from "utils/arrays";
 
 test("test slice function on array", () => {
   const array = [0, 1, 2, 3];

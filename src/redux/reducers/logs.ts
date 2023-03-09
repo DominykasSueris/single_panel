@@ -1,6 +1,6 @@
-import { ILogState } from "../specs/authSpecs";
+import { ILogState } from "redux/specs/authSpecs";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ILogLimitAction } from "../specs/logSpecs";
+import { ILogLimitAction } from "redux/specs/logSpecs";
 
 const initialState: ILogState = {
   limit: 15
