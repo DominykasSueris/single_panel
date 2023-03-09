@@ -1,21 +1,21 @@
 import { useState } from "react";
 
 /** Cloud Services */
-import { CloudWatch } from "../../../services/aws/aws";
-import { IAwsLogGroups } from "../../../services/aws/spec";
+import { CloudWatch } from "services/aws/aws";
+import { IAwsLogGroups } from "services/aws/spec";
 
 /** Components  */
-import BackButton from "../../Buttons/BackButton";
-import SearchBar from "../../SearchBar/SearchBar";
-// import Pagination from "../../Pagination/Pagination";
-import Spinner from "../../Spinner/Spinner";
-import AlertError from "../../Alert/AlertError";
-import Table from "../../Table/Table";
-import AwsGroupsRow from "../../Table/AwsTableRows/AwsGroupsRow";
+import BackButton from "components/Buttons/BackButton";
+import SearchBar from "components/SearchBar/SearchBar";
+// import Pagination from "components/Pagination/Pagination";
+import Spinner from "components/Spinner/Spinner";
+import AlertError from "components/Alert/AlertError";
+import Table from "components/Table/Table";
+import AwsGroupsRow from "components/Table/AwsTableRows/AwsGroupsRow";
 
 /** Utils */
-// import { arrays } from "../../../utils/";
-import { useCloudWatch, useQuery } from "../../../utils/hooks";
+// import { arrays } from "utils/";
+import { useCloudWatch, useQuery } from "utils/hooks";
 
 const AwsGroups = () => {
   const page = Number(useQuery().get("page") || "1");

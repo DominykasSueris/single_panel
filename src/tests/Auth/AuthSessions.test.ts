@@ -1,6 +1,6 @@
-import { AuthSessions } from "../../components/Auth/AuthSessions";
-import { AuthRegion, AuthTarget } from "../../redux/specs/authSpecs";
-import { WLDevProfiles } from "../../components/Auth/Login";
+import { AuthSessions } from "services/AuthSessions";
+import { AuthRegion, AuthTarget } from "redux/specs/authSpecs";
+import { WLDevProfiles } from "components/Auth/Login";
 
 beforeEach(() => {
   window.sessionStorage.clear();

@@ -1,8 +1,8 @@
-/** Utils */
-import { IAwsLogs, IAwsLogGroups, IAwsStreams } from "../../services/aws/spec";
+/** Services */
+import { IAwsLogs, IAwsLogGroups, IAwsStreams } from "services/aws/spec";
 
 /**Components */
-import AlertEmpty from "../Alert/AlertEmpty";
+import AlertEmpty from "components/Alert/AlertEmpty";
 
 interface ITableProps {
   headers: string[];

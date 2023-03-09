@@ -1,24 +1,24 @@
 import { useState } from "react";
 
 /** Cloud Services */
-import { CloudWatch } from "../../../services/aws/aws";
-import { IAwsStreams } from "../../../services/aws/spec";
+import { CloudWatch } from "services/aws/aws";
+import { IAwsStreams } from "services/aws/spec";
 
 /** Components  */
-import BackButton from "../../Buttons/BackButton";
-import SearchBar from "../../SearchBar/SearchBar";
-// import Pagination from "../../Pagination/Pagination";
-import AlertError from "../../Alert/AlertError";
-import Spinner from "../../Spinner/Spinner";
-import Table from "../../Table/Table";
-import AwsStreamsRow from "../../Table/AwsTableRows/AwsStreamsRow";
+import BackButton from "components/Buttons/BackButton";
+import SearchBar from "components/SearchBar/SearchBar";
+// import Pagination from "components/Pagination/Pagination";
+import AlertError from "components/Alert/AlertError";
+import Spinner from "components/Spinner/Spinner";
+import Table from "components/Table/Table";
+import AwsStreamsRow from "components/Table/AwsTableRows/AwsStreamsRow";
 
 /** Utils */
-import { useCloudWatch, useQuery } from "../../../utils/hooks";
-// import { arrays } from "../../../utils/";
+import { useCloudWatch, useQuery } from "utils/hooks";
+// import { arrays } from "utils/";
 
 const AwsStreams = () => {
-  const page = Number(useQuery().get("page") || "1");
+  // const page = Number(useQuery().get("page") || "1");
   const groupName = useQuery().get("group") || "";
   const [filterQuery, setFilterQuery] = useState<string>("");
 

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getFullYear } from "../../utils/dates";
-import { IDateState, IDateStartAction, IDateEndAction } from "../specs/dataSpecs";
+import { getFullYear } from "utils/dates";
+import { IDateState, IDateStartAction, IDateEndAction } from "redux/specs/dataSpecs";
 
 const initialState: IDateState = {
   startDate: getFullYear(1),

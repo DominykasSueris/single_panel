@@ -1,14 +1,20 @@
-import * as uuid from "uuid";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { cloudConnect } from "../../redux/reducers/auth";
-import { AuthTarget, IProfile, AuthRegion } from "../../redux/specs/authSpecs";
-import { AuthSessions } from "./AuthSessions";
-import { Connect } from "../../redux/actions/authActions";
-import { configClient } from "../../services/aws/aws";
-import { CloudWatch } from "../../services/aws/aws";
+import * as uuid from "uuid";
+
+/** Redux */
+import { cloudConnect } from "redux/reducers/auth";
+import { AuthTarget, IProfile, AuthRegion } from "redux/specs/authSpecs";
+import { Connect } from "redux/actions/authActions";
+
+/** Cloud Services */
+import { configClient } from "services/aws/aws";
+import { CloudWatch } from "services/aws/aws";
+
+/** Services */
+import { AuthSessions } from "services/AuthSessions";
 
 export enum WLDevProfiles {
   Dev = "dev",

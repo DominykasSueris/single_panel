@@ -4,9 +4,9 @@ import {
   IAuthConnectionAction,
   IAuthState,
   IProfile
-} from "../specs/authSpecs";
+} from "redux/specs/authSpecs";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthSessions } from "../..//components/Auth/AuthSessions";
+import { AuthSessions } from "services/AuthSessions";
 
 const methods = AuthSessions.getMethods();
 
