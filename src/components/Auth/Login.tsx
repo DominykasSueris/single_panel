@@ -10,7 +10,7 @@ import { AuthTarget, IProfile, AuthRegion } from "redux/specs/authSpecs";
 import { Connect } from "redux/actions/authActions";
 
 /** Cloud Services */
-import { configClient } from "../../services/aws/aws";
+import { configClient } from "services/aws/aws";
 import { CloudWatch } from "../../services/aws/aws";
 
 /** Services */
