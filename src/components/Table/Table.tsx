@@ -1,4 +1,4 @@
-/** Utils */
+/** Services */
 import { IAwsLogs, IAwsLogGroups, IAwsStreams } from "services/aws/spec";
 
 /**Components */
