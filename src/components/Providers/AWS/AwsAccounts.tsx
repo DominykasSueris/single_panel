@@ -63,7 +63,7 @@ const AwsAccounts = () => {
                   </div>
                   <div className="col-3 text-right">
                     <button
-                      onClick={e => disconnect(method)}
+                      onClick={() => disconnect(method)}
                       type="button"
                       className="btn btn-danger"
                     >

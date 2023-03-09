@@ -34,7 +34,7 @@ const Pagination = ({ active, pageCount }: IPaginationProps) => {
       ...pageArray.map((pageKey: number) => {
         const p = pageKey + 1;
         return (
-          <li className={`page-item ${activePage === p ? "active" : ""}`}>
+          <li key={p} className={`page-item ${activePage === p ? "active" : ""}`}>
             <a
               className="page-link"
               href="#"

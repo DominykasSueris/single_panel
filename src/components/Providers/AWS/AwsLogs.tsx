@@ -19,7 +19,7 @@ import { useCloudWatch, useQuery } from "utils/hooks";
 
 const AwsLogs = () => {
   const groupName = useQuery().get("group") || "";
-  const page = Number(useQuery().get("page") || "1");
+  // const page = Number(useQuery().get("page") || "1");
 
   const [filterQuery, setFilterQuery] = useState<string>("");
   const {

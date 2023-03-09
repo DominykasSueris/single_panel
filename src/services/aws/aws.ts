@@ -18,7 +18,7 @@ export const configClient = async (key: string, secret: string, region = "eu-wes
     await CloudWatch.addWatcher(config);
     isConnected = true;
   } catch {
-  } finally {
-    return isConnected;
+    console.log("errror");
   }
+  return isConnected;
 };

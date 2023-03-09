@@ -65,7 +65,6 @@ const Login = ({ isAuth }: LoginProps) => {
     loginData.tag = tag;
 
     AuthSessions.updateMethods(loginData);
-    const data = AuthSessions.getMethods();
     const payload = Connect(loginData.provider, loginData);
     const action = cloudConnect(payload);
     dispatch(action);

@@ -7,7 +7,7 @@ export const PerPage = 50;
  * @returns
  * starting page index and last page index
  */
-export const sliceArray = (arr: any[], currentPage: number) => {
+export const sliceArray = (arr: number[], currentPage: number) => {
   const startIndex = currentPage * PerPage - PerPage;
   const endIndex = currentPage * PerPage;
   console.log("Start", startIndex, endIndex, arr);
@@ -21,6 +21,6 @@ export const sliceArray = (arr: any[], currentPage: number) => {
  * number of pages
  */
 
-export const getNumberOfPages = (arr: any[]) => {
+export const getNumberOfPages = (arr: number[]) => {
   return Math.ceil(arr.length / PerPage);
 };

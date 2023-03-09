@@ -15,10 +15,10 @@ import AwsGroupsRow from "components/Table/AwsTableRows/AwsGroupsRow";
 
 /** Utils */
 // import { arrays } from "utils/";
-import { useCloudWatch, useQuery } from "utils/hooks";
+import { useCloudWatch } from "utils/hooks";
 
 const AwsGroups = () => {
-  const page = Number(useQuery().get("page") || "1");
+  // const page = Number(useQuery().get("page") || "1");
   const [filterQuery, setFilterQuery] = useState<string>("");
 
   const { data: groups, loading, error } = useCloudWatch<IAwsLogGroups>(CloudWatch.groups());
