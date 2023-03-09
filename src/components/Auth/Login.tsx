@@ -11,7 +11,7 @@ import { Connect } from "redux/actions/authActions";
 
 /** Cloud Services */
 import { configClient } from "services/aws/aws";
-import { CloudWatch } from "../../services/aws/aws";
+import { CloudWatch } from "services/aws/aws";
 
 /** Services */
 import { AuthSessions } from "../../services/AuthSessions";
