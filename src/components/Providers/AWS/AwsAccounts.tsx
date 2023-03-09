@@ -10,8 +10,8 @@ import { SyncAuthMethods } from "redux/actions/authActions";
 /** Cloud Services */
 import { CloudWatch } from "services/aws/aws";
 
-/** Utils */
-import { AuthSessions } from "components/Auth/AuthSessions";
+/** Services */
+import { AuthSessions } from "services/AuthSessions";
 
 const AwsAccounts = () => {
   const dispatch = useDispatch();

@@ -13,8 +13,8 @@ import { Connect } from "../../redux/actions/authActions";
 import { configClient } from "../../services/aws/aws";
 import { CloudWatch } from "../../services/aws/aws";
 
-/** Utils */
-import { AuthSessions } from "./AuthSessions";
+/** Services */
+import { AuthSessions } from "../../services/AuthSessions";
 
 export enum WLDevProfiles {
   Dev = "dev",

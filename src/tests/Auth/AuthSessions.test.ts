@@ -1,4 +1,4 @@
-import { AuthSessions } from "components/Auth/AuthSessions";
+import { AuthSessions } from "services/AuthSessions";
 import { AuthRegion, AuthTarget } from "redux/specs/authSpecs";
 import { WLDevProfiles } from "components/Auth/Login";
 

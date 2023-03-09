@@ -13,8 +13,8 @@ import { configClient } from "services/aws/aws";
 import Login from "components/Auth/Login";
 import Spinner from "components/Spinner/Spinner";
 
-/** Utils */
-import { AuthSessions } from "components/Auth/AuthSessions";
+/** Services */
+import { AuthSessions } from "services/AuthSessions";
 
 const AwsAuth = () => {
   const [isAuth, setIsAuth] = useState(false);
