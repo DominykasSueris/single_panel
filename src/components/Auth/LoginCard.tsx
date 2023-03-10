@@ -1,5 +1,6 @@
 import Input from "components/Input/Input";
 import Label from "components/Input/Label";
+import Span from "components/Input/Span";
 import { AuthRegion, AuthTarget } from "redux/specs/authSpecs";
 import { WLDevProfiles } from "./Login";
 
@@ -74,15 +75,7 @@ const LoginCard = ({
                     </option>
                   </select>
                 </div>
-                <div className="col-sm-12 col-md-4">
-                  <span id="aws-profile-helper" className="form-text">
-                    {profile === WLDevProfiles.Programmatic
-                      ? ""
-                      : profile === WLDevProfiles.Dev
-                      ? "Watchland test profile"
-                      : "AWS Profile"}
-                  </span>
-                </div>
+                <div className="col-sm-12 col-md-4"></div>
               </div>
               <div className="row align-items-center pt-3">
                 <Label htmlFor="aws-region" className="col-form-label" text="Region" />
@@ -106,11 +99,7 @@ const LoginCard = ({
                     ))}
                   </select>
                 </div>
-                <div className="col-sm-12 col-md-4">
-                  <span id="aws-region" className="form-text">
-                    AWS Region
-                  </span>
-                </div>
+                <Span id="aws-region" className="form-text" text="Aws Region" />
               </div>
               {profile === WLDevProfiles.Programmatic ? (
                 <>
@@ -125,29 +114,19 @@ const LoginCard = ({
                       autoComplete={"on"}
                       disabled={authTarget != AuthTarget.AWS}
                     />
-                    <div className="col-sm-12 col-md-4">
-                      <span id="aws-key-helper" className="form-text">
-                        AWS Key Id
-                      </span>
-                    </div>
+                    <Span id="aws-key-helper" className="form-text" text="AWS Key Id" />
                     <div className="row align-items-center pt-3">
                       <Label htmlFor="aws-key-secret" className="col-form-label" text="Secret" />
-                      <div className="col-sm-12 col-md-6">
-                        <input
-                          type="password"
-                          onChange={ev => setSecret(ev.target.value)}
-                          id="aws-key-secret"
-                          required
-                          className="form-control"
-                          autoComplete={"on"}
-                          disabled={authTarget != AuthTarget.AWS}
-                        />
-                      </div>
-                      <div className="col-sm-12 col-md-4">
-                        <span id="aws-secret-helper" className="form-text">
-                          AWS Key Secret
-                        </span>
-                      </div>
+                      <Input
+                        type="password"
+                        onChange={ev => setSecret(ev.target.value)}
+                        id="aws-key-secret"
+                        required
+                        className="form-control"
+                        autoComplete={"on"}
+                        disabled={authTarget != AuthTarget.AWS}
+                      />
+                      <Span id="aws-secret-helper" className="form-text" text="AWS Key Secret" />
                     </div>
                   </div>
                 </>
