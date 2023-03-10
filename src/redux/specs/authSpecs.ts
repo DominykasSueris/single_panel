@@ -62,9 +62,6 @@ export enum AuthRegion {
   SA_East_1 = "sa-east-1"
 }
 
-export interface IAuthConnectData {
-  payload: any;
-}
 export interface IAuthAction {
   type: AuthType;
   target: AuthTarget;

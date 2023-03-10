@@ -41,7 +41,7 @@ const Login = ({ isAuth }: LoginProps) => {
 
     let isConnected = false;
 
-    let loginData: IProfile = {
+    const loginData: IProfile = {
       id: uuid.v4(),
       type: profile,
       provider: authTarget,
@@ -60,12 +60,11 @@ const Login = ({ isAuth }: LoginProps) => {
       return;
     }
 
-    let watchers = CloudWatch.listWatchers();
-    let tag = watchers[watchers.length - 1];
+    const watchers = CloudWatch.listWatchers();
+    const tag = watchers[watchers.length - 1];
     loginData.tag = tag;
 
     AuthSessions.updateMethods(loginData);
-    const data = AuthSessions.getMethods();
     const payload = Connect(loginData.provider, loginData);
     const action = cloudConnect(payload);
     dispatch(action);
@@ -93,7 +92,11 @@ const Login = ({ isAuth }: LoginProps) => {
                 <div className="col-sm-12 col-md-3">
                   <select
                     defaultValue={AuthTarget.AWS}
-                    onChange={(ev: any) => setAuthTarget(ev.target.value.toLowerCase())}
+                    onChange={ev =>
+                      setAuthTarget(
+                        AuthTarget[ev.target.value.toLowerCase() as keyof typeof AuthTarget]
+                      )
+                    }
                     name="authTarget"
                     required
                     className="form-select"
@@ -110,7 +113,9 @@ const Login = ({ isAuth }: LoginProps) => {
                 <div className="col-sm-12 col-md-6">
                   <select
                     defaultValue={WLDevProfiles.Programmatic}
-                    onChange={(ev: any) => setProfile(ev.target.value)}
+                    onChange={ev =>
+                      setProfile(WLDevProfiles[ev.target.value as keyof typeof WLDevProfiles])
+                    }
                     name="authType"
                     required
                     className="form-select"
@@ -121,7 +126,6 @@ const Login = ({ isAuth }: LoginProps) => {
                     <option value={WLDevProfiles.Programmatic} key={WLDevProfiles.Programmatic}>
                       Programmatic Access
                     </option>
-                    {/* <option value={WLDevProfiles.Dev}>Watchland dev</option> */}
                   </select>
                 </div>
                 <div className="col-sm-12 col-md-4">
@@ -143,7 +147,9 @@ const Login = ({ isAuth }: LoginProps) => {
                 <div className="col-sm-12 col-md-6">
                   <select
                     defaultValue={AuthRegion.EU_West_1}
-                    onChange={(ev: any) => setAuthRegion(ev.target.value)}
+                    onChange={ev =>
+                      setAuthRegion(AuthRegion[ev.target.value as keyof typeof AuthRegion])
+                    }
                     name="authRegion"
                     required
                     className="form-select"
@@ -164,56 +170,57 @@ const Login = ({ isAuth }: LoginProps) => {
                   </span>
                 </div>
               </div>
-              {profile === WLDevProfiles.Programmatic
-                ? [
-                    <div className="row align-items-center pt-3">
-                      <div className="col-sm-12 col-md-2">
-                        <label htmlFor="aws-key" className="col-form-label">
-                          Key
-                        </label>
-                      </div>
-                      <div className="col-sm-12 col-md-6">
-                        <input
-                          type="text"
-                          id="aws-key"
-                          onChange={(ev: any) => setKey(ev.target.value)}
-                          className="form-control"
-                          required
-                          autoComplete={"on"}
-                          disabled={authTarget != AuthTarget.AWS}
-                        />
-                      </div>
-                      <div className="col-sm-12 col-md-4">
-                        <span id="aws-key-helper" className="form-text">
-                          AWS Key Id
-                        </span>
-                      </div>
-                    </div>,
-                    <div className="row align-items-center pt-3">
-                      <div className="col-sm-12 col-md-2">
-                        <label htmlFor="aws-key-secret" className="col-form-label">
-                          Secret
-                        </label>
-                      </div>
-                      <div className="col-sm-12 col-md-6">
-                        <input
-                          type="password"
-                          onChange={(ev: any) => setSecret(ev.target.value)}
-                          id="aws-key-secret"
-                          required
-                          className="form-control"
-                          autoComplete={"on"}
-                          disabled={authTarget != AuthTarget.AWS}
-                        />
-                      </div>
-                      <div className="col-sm-12 col-md-4">
-                        <span id="aws-secret-helper" className="form-text">
-                          AWS Key Secret
-                        </span>
-                      </div>
+              {profile === WLDevProfiles.Programmatic ? (
+                <>
+                  <div className="row align-items-center pt-3">
+                    <div className="col-sm-12 col-md-2">
+                      <label htmlFor="aws-key" className="col-form-label">
+                        Key
+                      </label>
                     </div>
-                  ]
-                : null}
+                    <div className="col-sm-12 col-md-6">
+                      <input
+                        type="text"
+                        id="aws-key"
+                        onChange={ev => setKey(ev.target.value)}
+                        className="form-control"
+                        required
+                        autoComplete={"on"}
+                        disabled={authTarget != AuthTarget.AWS}
+                      />
+                    </div>
+                    <div className="col-sm-12 col-md-4">
+                      <span id="aws-key-helper" className="form-text">
+                        AWS Key Id
+                      </span>
+                    </div>
+                  </div>
+                  ,
+                  <div className="row align-items-center pt-3">
+                    <div className="col-sm-12 col-md-2">
+                      <label htmlFor="aws-key-secret" className="col-form-label">
+                        Secret
+                      </label>
+                    </div>
+                    <div className="col-sm-12 col-md-6">
+                      <input
+                        type="password"
+                        onChange={ev => setSecret(ev.target.value)}
+                        id="aws-key-secret"
+                        required
+                        className="form-control"
+                        autoComplete={"on"}
+                        disabled={authTarget != AuthTarget.AWS}
+                      />
+                    </div>
+                    <div className="col-sm-12 col-md-4">
+                      <span id="aws-secret-helper" className="form-text">
+                        AWS Key Secret
+                      </span>
+                    </div>
+                  </div>
+                </>
+              ) : null}
               <div className="row">
                 <div className="col-sm-12 col-md-8 text-right pt-3">
                   <button className="btn btn-primary" disabled={authTarget != AuthTarget.AWS}>

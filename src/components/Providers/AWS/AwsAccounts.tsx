@@ -25,7 +25,7 @@ const AwsAccounts = () => {
     const remainingConnections = existingMethods.filter(
       existingMethod => existingMethod.id !== method.id
     );
-    CloudWatch.removeWatcher(method.tag!);
+    if (method.tag) CloudWatch.removeWatcher(method.tag);
     AuthSessions.setMethods(remainingConnections);
     dispatch(updateConnections(SyncAuthMethods(remainingConnections)));
   };
@@ -51,30 +51,28 @@ const AwsAccounts = () => {
         </Link>
       </div>
       <ul className="list-group">
-        {[
-          ...loginMethods.map((method: IProfile) => {
-            return (
-              <li className="list-group-item container" key={method.id}>
-                <div className="row align-items-center">
-                  <div className="col-9">
-                    <p className="mb-0">
-                      {method.tag} - <strong>{method.type}</strong>
-                    </p>
-                  </div>
-                  <div className="col-3 text-right">
-                    <button
-                      onClick={e => disconnect(method)}
-                      type="button"
-                      className="btn btn-danger"
-                    >
-                      Disconnect
-                    </button>
-                  </div>
+        {loginMethods.map((method: IProfile) => {
+          return (
+            <li className="list-group-item container" key={method.id}>
+              <div className="row align-items-center">
+                <div className="col-9">
+                  <p className="mb-0">
+                    {method.tag} - <strong>{method.type}</strong>
+                  </p>
                 </div>
-              </li>
-            );
-          })
-        ]}
+                <div className="col-3 text-right">
+                  <button
+                    onClick={() => disconnect(method)}
+                    type="button"
+                    className="btn btn-danger"
+                  >
+                    Disconnect
+                  </button>
+                </div>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

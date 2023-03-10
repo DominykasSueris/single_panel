@@ -28,7 +28,7 @@ const AwsAuth = () => {
 
   const syncClients = async () => {
     const methods = AuthSessions.getMethods();
-    for (let method of methods) {
+    for (const method of methods) {
       await configClient(method.key, method.secret, method.region);
     }
     setLoading(false);
