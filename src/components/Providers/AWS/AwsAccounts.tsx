@@ -25,8 +25,7 @@ const AwsAccounts = () => {
     const remainingConnections = existingMethods.filter(
       existingMethod => existingMethod.id !== method.id
     );
-    if (method.tag)
-      CloudWatch.removeWatcher(method.tag);
+    if (method.tag) CloudWatch.removeWatcher(method.tag);
     AuthSessions.setMethods(remainingConnections);
     dispatch(updateConnections(SyncAuthMethods(remainingConnections)));
   };
@@ -73,8 +72,7 @@ const AwsAccounts = () => {
               </div>
             </li>
           );
-        })
-        }
+        })}
       </ul>
     </div>
   );

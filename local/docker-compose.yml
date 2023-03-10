@@ -5,6 +5,6 @@ services:
       context: ../
       dockerfile: ./local/Dockerfile
     volumes:
-      - ./:/watchland/src
+      - ../src/:/watchland/src
     ports:
       - "3000:3000"

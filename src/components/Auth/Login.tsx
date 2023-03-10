@@ -133,8 +133,8 @@ const Login = ({ isAuth }: LoginProps) => {
                     {profile === WLDevProfiles.Programmatic
                       ? ""
                       : profile === WLDevProfiles.Dev
-                        ? "Watchland test profile"
-                        : "AWS Profile"}
+                      ? "Watchland test profile"
+                      : "AWS Profile"}
                   </span>
                 </div>
               </div>
@@ -170,7 +170,7 @@ const Login = ({ isAuth }: LoginProps) => {
                   </span>
                 </div>
               </div>
-              {profile === WLDevProfiles.Programmatic ?
+              {profile === WLDevProfiles.Programmatic ? (
                 <>
                   <div className="row align-items-center pt-3">
                     <div className="col-sm-12 col-md-2">
@@ -182,7 +182,7 @@ const Login = ({ isAuth }: LoginProps) => {
                       <input
                         type="text"
                         id="aws-key"
-                        onChange={(ev) => setKey(ev.target.value)}
+                        onChange={ev => setKey(ev.target.value)}
                         className="form-control"
                         required
                         autoComplete={"on"}
@@ -194,7 +194,8 @@ const Login = ({ isAuth }: LoginProps) => {
                         AWS Key Id
                       </span>
                     </div>
-                  </div>,
+                  </div>
+                  ,
                   <div className="row align-items-center pt-3">
                     <div className="col-sm-12 col-md-2">
                       <label htmlFor="aws-key-secret" className="col-form-label">
@@ -204,7 +205,7 @@ const Login = ({ isAuth }: LoginProps) => {
                     <div className="col-sm-12 col-md-6">
                       <input
                         type="password"
-                        onChange={(ev) => setSecret(ev.target.value)}
+                        onChange={ev => setSecret(ev.target.value)}
                         id="aws-key-secret"
                         required
                         className="form-control"
@@ -219,7 +220,7 @@ const Login = ({ isAuth }: LoginProps) => {
                     </div>
                   </div>
                 </>
-                : null}
+              ) : null}
               <div className="row">
                 <div className="col-sm-12 col-md-8 text-right pt-3">
                   <button className="btn btn-primary" disabled={authTarget != AuthTarget.AWS}>

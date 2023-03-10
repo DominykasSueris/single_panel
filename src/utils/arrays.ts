@@ -23,7 +23,6 @@ export const sliceArray = (arr: any[], currentPage: number) => {
  * number of pages
  */
 
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getNumberOfPages = (arr: any[]) => {
   return Math.ceil(arr.length / PerPage);
