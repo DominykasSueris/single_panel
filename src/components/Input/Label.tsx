@@ -6,9 +6,11 @@ interface LabelProps {
 
 const Label = ({ htmlFor, className, text }: LabelProps) => {
   return (
-    <label htmlFor={htmlFor} className={className}>
-      {text}
-    </label>
+    <div className="col-sm-12 col-md-2">
+      <label htmlFor={htmlFor} className={className}>
+        {text}
+      </label>
+    </div>
   );
 };
 
