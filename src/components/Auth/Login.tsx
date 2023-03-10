@@ -92,7 +92,11 @@ const Login = ({ isAuth }: LoginProps) => {
                 <div className="col-sm-12 col-md-3">
                   <select
                     defaultValue={AuthTarget.AWS}
-                    onChange={(ev: any) => setAuthTarget(ev.target.value.toLowerCase())}
+                    onChange={ev =>
+                      setAuthTarget(
+                        AuthTarget[ev.target.value.toLowerCase() as keyof typeof AuthTarget]
+                      )
+                    }
                     name="authTarget"
                     required
                     className="form-select"
@@ -109,7 +113,9 @@ const Login = ({ isAuth }: LoginProps) => {
                 <div className="col-sm-12 col-md-6">
                   <select
                     defaultValue={WLDevProfiles.Programmatic}
-                    onChange={(ev: any) => setProfile(ev.target.value)}
+                    onChange={ev =>
+                      setProfile(WLDevProfiles[ev.target.value as keyof typeof WLDevProfiles])
+                    }
                     name="authType"
                     required
                     className="form-select"
@@ -120,7 +126,6 @@ const Login = ({ isAuth }: LoginProps) => {
                     <option value={WLDevProfiles.Programmatic} key={WLDevProfiles.Programmatic}>
                       Programmatic Access
                     </option>
-                    {/* <option value={WLDevProfiles.Dev}>Watchland dev</option> */}
                   </select>
                 </div>
                 <div className="col-sm-12 col-md-4">
@@ -142,7 +147,9 @@ const Login = ({ isAuth }: LoginProps) => {
                 <div className="col-sm-12 col-md-6">
                   <select
                     defaultValue={AuthRegion.EU_West_1}
-                    onChange={(ev: any) => setAuthRegion(ev.target.value)}
+                    onChange={ev =>
+                      setAuthRegion(AuthRegion[ev.target.value as keyof typeof AuthRegion])
+                    }
                     name="authRegion"
                     required
                     className="form-select"
@@ -175,7 +182,7 @@ const Login = ({ isAuth }: LoginProps) => {
                         <input
                           type="text"
                           id="aws-key"
-                          onChange={(ev: any) => setKey(ev.target.value)}
+                          onChange={ev => setKey(ev.target.value)}
                           className="form-control"
                           required
                           autoComplete={"on"}
@@ -197,7 +204,7 @@ const Login = ({ isAuth }: LoginProps) => {
                       <div className="col-sm-12 col-md-6">
                         <input
                           type="password"
-                          onChange={(ev: any) => setSecret(ev.target.value)}
+                          onChange={ev => setSecret(ev.target.value)}
                           id="aws-key-secret"
                           required
                           className="form-control"
