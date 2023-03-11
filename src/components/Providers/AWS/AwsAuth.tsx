@@ -16,9 +16,12 @@ import Spinner from "components/Spinner/Spinner";
 /** Services */
 import { AuthSessions } from "services/AuthSessions";
 
+/**Utils */
+import { useLoadingContext } from "utils/LoadingContext";
+
 const AwsAuth = () => {
   const [isAuth, setIsAuth] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useLoadingContext();
   const auth = useSelector((state: RootState) => {
     const auths = state.auth.methods?.filter(
       (method: IProfile) => method.provider === AuthTarget.AWS

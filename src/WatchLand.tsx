@@ -14,25 +14,30 @@ import NotFoundPage from "components/NotFoundPage/NotFoundPage";
 import Azure from "components/Providers/Azure/Azure";
 import GoogleCloud from "components/Providers/gCloud/GoogleCloud";
 
+/**Utils */
+import { LoadingProvider } from "./utils/LoadingContext";
+
 const WatchLand = () => {
   return (
     <div className="watchLand">
       <Navbar />
       <main className="container">
         <Routes>
-          <Route path="/" element={<HomePage />}></Route>
-          <Route path="*" element={<NotFoundPage />}></Route>
-          <Route path="/aws">
-            <Route element={<AwsAuth />}>
-              <Route index element={<AwsAccounts />}></Route>
-              <Route path="groups" element={<AwsGroups />}></Route>
-              <Route path="streams" element={<AwsStreams />}></Route>
-              <Route path="logs" element={<AwsLogs />}></Route>
+          <LoadingProvider>
+            <Route path="/" element={<HomePage />}></Route>
+            <Route path="*" element={<NotFoundPage />}></Route>
+            <Route path="/aws">
+              <Route element={<AwsAuth />}>
+                <Route index element={<AwsAccounts />}></Route>
+                <Route path="groups" element={<AwsGroups />}></Route>
+                <Route path="streams" element={<AwsStreams />}></Route>
+                <Route path="logs" element={<AwsLogs />}></Route>
+              </Route>
             </Route>
-          </Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/azure" element={<Azure />}></Route>
-          <Route path="/google" element={<GoogleCloud />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/azure" element={<Azure />}></Route>
+            <Route path="/google" element={<GoogleCloud />}></Route>
+          </LoadingProvider>
         </Routes>
       </main>
     </div>

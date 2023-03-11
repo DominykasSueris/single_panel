@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Watch } from "watch-land-ts-client/dist/lib/watch";
+import { useLoadingContext } from "./LoadingContext";
+
 /**
  *
  * @returns void
@@ -13,7 +15,7 @@ export const useQuery = () => {
 type CloudWatchType = <Type>(watch: Watch) => { data: Type[]; loading: boolean; error: boolean };
 
 export const useCloudWatch: CloudWatchType = <Type>(watch: Watch) => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useLoadingContext();
   const [error, setError] = useState<boolean>(false);
   const [data, setData] = useState<Type[]>([]);
 
