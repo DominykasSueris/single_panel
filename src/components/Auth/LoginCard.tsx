@@ -115,19 +115,19 @@ const LoginCard = ({
                       disabled={authTarget != AuthTarget.AWS}
                     />
                     <Span id="aws-key-helper" className="form-text" text="AWS Key Id" />
-                    <div className="row align-items-center pt-3">
-                      <Label htmlFor="aws-key-secret" className="col-form-label" text="Secret" />
-                      <Input
-                        type="password"
-                        onChange={ev => setSecret(ev.target.value)}
-                        id="aws-key-secret"
-                        required
-                        className="form-control"
-                        autoComplete={"on"}
-                        disabled={authTarget != AuthTarget.AWS}
-                      />
-                      <Span id="aws-secret-helper" className="form-text" text="AWS Key Secret" />
-                    </div>
+                  </div>
+                  <div className="row align-items-center pt-3">
+                    <Label htmlFor="aws-key-secret" className="col-form-label" text="Secret" />
+                    <Input
+                      type="password"
+                      onChange={ev => setSecret(ev.target.value)}
+                      id="aws-key-secret"
+                      required
+                      className="form-control"
+                      autoComplete={"on"}
+                      disabled={authTarget != AuthTarget.AWS}
+                    />
+                    <Span id="aws-secret-helper" className="form-text" text="AWS Key Secret" />
                   </div>
                 </>
               ) : null}
