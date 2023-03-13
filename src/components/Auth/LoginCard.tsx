@@ -26,12 +26,43 @@ const LoginCard = ({
   setKey,
   setSecret
 }: LoginCardProps) => {
-
   const convertEnumToOptions = (e: typeof AuthRegion | typeof AuthTarget): Option[] => {
-    const values = Object.values(e)
-    const keys = Object.keys(e)
-    return keys.map((key, i) => {return {key: key, value: values[i]}});
-  }
+    const values = Object.values(e);
+    const keys = Object.keys(e);
+    return keys.map((key, i) => {
+      return { key: values[i], value: key };
+    });
+  };
+
+  const awsInput = () => {
+    {
+      if (WLDevProfiles.Programmatic === profile)
+        return (
+          <>
+            <div className="row align-items-center pt-3">
+              <Label htmlFor="aws-key" text="Key" />
+              <Input
+                type="text"
+                id="aws-key"
+                onChange={ev => setKey(ev.target.value)}
+                disabled={authTarget != AuthTarget.AWS}
+              />
+              <Span id="aws-key-helper" text="AWS Key Id" />
+            </div>
+            <div className="row align-items-center pt-3">
+              <Label htmlFor="aws-key-secret" text="Secret" />
+              <Input
+                type="password"
+                onChange={ev => setSecret(ev.target.value)}
+                id="aws-key-secret"
+                disabled={authTarget != AuthTarget.AWS}
+              />
+              <Span id="aws-secret-helper" text="AWS Key Secret" />
+            </div>
+          </>
+        );
+    }
+  };
 
   return (
     <div>
@@ -67,11 +98,10 @@ const LoginCard = ({
                     name="authType"
                     id="aws-profile"
                     disabled={authTarget != AuthTarget.AWS}
-                    options={[{ key: WLDevProfiles.Programmatic, value: WLDevProfiles.Programmatic }]}
+                    options={[
+                      { key: WLDevProfiles.Programmatic, value: WLDevProfiles.Programmatic }
+                    ]}
                   />
-                  {/* <option value={WLDevProfiles.Programmatic} key={WLDevProfiles.Programmatic}>
-                      Programmatic Access
-                    </option> */}
                 </div>
               </div>
               <div className="row align-items-center pt-3">
@@ -91,30 +121,7 @@ const LoginCard = ({
                 </div>
                 <Span id="aws-region" text="Aws Region" />
               </div>
-              {profile === WLDevProfiles.Programmatic ? (
-                <>
-                  <div className="row align-items-center pt-3">
-                    <Label htmlFor="aws-key" text="Key" />
-                    <Input
-                      type="text"
-                      id="aws-key"
-                      onChange={ev => setKey(ev.target.value)}
-                      disabled={authTarget != AuthTarget.AWS}
-                    />
-                    <Span id="aws-key-helper" text="AWS Key Id" />
-                  </div>
-                  <div className="row align-items-center pt-3">
-                    <Label htmlFor="aws-key-secret" text="Secret" />
-                    <Input
-                      type="password"
-                      onChange={ev => setSecret(ev.target.value)}
-                      id="aws-key-secret"
-                      disabled={authTarget != AuthTarget.AWS}
-                    />
-                    <Span id="aws-secret-helper" text="AWS Key Secret" />
-                  </div>
-                </>
-              ) : null}
+              {awsInput()}
               <div className="row">
                 <div className="col-sm-12 col-md-8 text-right pt-3">
                   <button className="btn btn-primary" disabled={authTarget != AuthTarget.AWS}>

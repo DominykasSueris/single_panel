@@ -1,9 +1,10 @@
 import { WLDevProfiles } from "components/Auth/Login";
+import { ChangeEvent } from "react";
 import { AuthRegion, AuthTarget } from "redux/specs/authSpecs";
 
 interface SelectProps {
   defaultValue: WLDevProfiles | AuthTarget | AuthRegion;
-  onChange: (input: any) => void;
+  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
   name: string;
   id: string;
   disabled: boolean;
@@ -11,8 +12,8 @@ interface SelectProps {
 }
 
 export interface Option {
-  key: string,
-  value: string | number
+  key: string;
+  value: string | number;
 }
 
 const Select = ({ defaultValue, onChange, name, id, options, disabled }: SelectProps) => {
@@ -27,10 +28,11 @@ const Select = ({ defaultValue, onChange, name, id, options, disabled }: SelectP
       aria-label="Default select example"
       disabled={disabled}
     >
-      {
-        options.map(option =>
-          <option key={option.key} value={option.key}>{option.value}</option>)
-      }
+      {options.map(option => (
+        <option key={option.key} value={option.key}>
+          {option.value}
+        </option>
+      ))}
     </select>
   );
 };
