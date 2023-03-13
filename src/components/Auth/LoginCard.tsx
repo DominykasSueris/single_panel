@@ -109,9 +109,6 @@ const LoginCard = ({
                       type="text"
                       id="aws-key"
                       onChange={ev => setKey(ev.target.value)}
-                      className="form-control"
-                      required
-                      autoComplete={"on"}
                       disabled={authTarget != AuthTarget.AWS}
                     />
                     <Span id="aws-key-helper" className="form-text" text="AWS Key Id" />
@@ -122,9 +119,6 @@ const LoginCard = ({
                       type="password"
                       onChange={ev => setSecret(ev.target.value)}
                       id="aws-key-secret"
-                      required
-                      className="form-control"
-                      autoComplete={"on"}
                       disabled={authTarget != AuthTarget.AWS}
                     />
                     <Span id="aws-secret-helper" className="form-text" text="AWS Key Secret" />
