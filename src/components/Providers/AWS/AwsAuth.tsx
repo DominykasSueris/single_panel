@@ -11,17 +11,12 @@ import { configClient } from "services/aws/aws";
 
 /** Components  */
 import Login from "components/Auth/Login";
-import Spinner from "components/Spinner/Spinner";
 
 /** Services */
 import { AuthSessions } from "services/AuthSessions";
 
-/**Utils */
-import { useLoadingContext } from "utils/LoadingContext";
-
 const AwsAuth = () => {
   const [isAuth, setIsAuth] = useState(false);
-  const [loading, setLoading] = useLoadingContext();
   const auth = useSelector((state: RootState) => {
     const auths = state.auth.methods?.filter(
       (method: IProfile) => method.provider === AuthTarget.AWS
@@ -34,7 +29,6 @@ const AwsAuth = () => {
     for (const method of methods) {
       await configClient(method.key, method.secret, method.region);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -52,7 +46,7 @@ const AwsAuth = () => {
     }
   }, [auth]);
 
-  return isAuth && !loading ? <Outlet></Outlet> : loading ? <Spinner /> : <Login isAuth={isAuth} />;
+  return isAuth ? <Outlet></Outlet> : <Login isAuth={isAuth} />;
 };
 
 export default AwsAuth;
