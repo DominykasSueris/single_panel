@@ -7,10 +7,15 @@ interface SelectProps {
   name: string;
   id: string;
   disabled: boolean;
-  values: any;
+  options: Option[];
 }
 
-const Select = ({ defaultValue, onChange, name, id, values, disabled }: SelectProps) => {
+export interface Option {
+  key: string,
+  value: string | number
+}
+
+const Select = ({ defaultValue, onChange, name, id, options, disabled }: SelectProps) => {
   return (
     <select
       defaultValue={defaultValue}
@@ -22,12 +27,10 @@ const Select = ({ defaultValue, onChange, name, id, values, disabled }: SelectPr
       aria-label="Default select example"
       disabled={disabled}
     >
-      {Object.keys(values).map(key => (
-        <option value={key.toLowerCase()} key={key}>
-          {key}
-        </option>
-      ))}
-      ))
+      {
+        options.map(option =>
+          <option key={option.key} value={option.key}>{option.value}</option>)
+      }
     </select>
   );
 };

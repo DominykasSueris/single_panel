@@ -1,7 +1,7 @@
 import Input from "components/Input/Input";
 import Label from "components/Input/Label";
 import Span from "components/Input/Span";
-import Select from "components/Input/Select";
+import Select, { Option } from "components/Input/Select";
 import { AuthRegion, AuthTarget } from "redux/specs/authSpecs";
 import { WLDevProfiles } from "./Login";
 
@@ -26,6 +26,13 @@ const LoginCard = ({
   setKey,
   setSecret
 }: LoginCardProps) => {
+
+  const convertEnumToOptions = (e: typeof AuthRegion | typeof AuthTarget): Option[] => {
+    const values = Object.values(e)
+    const keys = Object.keys(e)
+    return keys.map((key, i) => {return {key: key, value: values[i]}});
+  }
+
   return (
     <div>
       <div className="row pt-5">
@@ -47,7 +54,7 @@ const LoginCard = ({
                     }
                     name="authTarget"
                     id="authTarget"
-                    values={AuthTarget}
+                    options={convertEnumToOptions(AuthTarget)}
                     disabled={authTarget != AuthTarget.AWS}
                   />
                 </div>
@@ -60,7 +67,7 @@ const LoginCard = ({
                     name="authType"
                     id="aws-profile"
                     disabled={authTarget != AuthTarget.AWS}
-                    values={WLDevProfiles.Programmatic}
+                    options={[{ key: WLDevProfiles.Programmatic, value: WLDevProfiles.Programmatic }]}
                   />
                   {/* <option value={WLDevProfiles.Programmatic} key={WLDevProfiles.Programmatic}>
                       Programmatic Access
@@ -79,7 +86,7 @@ const LoginCard = ({
                     id="authRegion"
                     aria-label="Default select example"
                     disabled={authTarget != AuthTarget.AWS}
-                    values={AuthRegion}
+                    options={convertEnumToOptions(AuthRegion)}
                   />
                 </div>
                 <Span id="aws-region" text="Aws Region" />
