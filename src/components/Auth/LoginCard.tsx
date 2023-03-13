@@ -1,6 +1,7 @@
 import Input from "components/Input/Input";
 import Label from "components/Input/Label";
 import Span from "components/Input/Span";
+import Select from "components/Input/Select";
 import { AuthRegion, AuthTarget } from "redux/specs/authSpecs";
 import { WLDevProfiles } from "./Login";
 
@@ -35,9 +36,9 @@ const LoginCard = ({
             </div>
             <div className="card-body">
               <div className="row align-items-center">
-                <Label htmlFor="aws-profile" className="col-form-label" text="Provider" />
+                <Label htmlFor="aws-profile" text="Provider" />
                 <div className="col-sm-12 col-md-3">
-                  <select
+                  <Select
                     defaultValue={AuthTarget.AWS}
                     onChange={ev =>
                       setAuthTarget(
@@ -45,83 +46,65 @@ const LoginCard = ({
                       )
                     }
                     name="authTarget"
-                    required
-                    className="form-select"
                     id="authTarget"
-                    aria-label="Default select example"
-                  >
-                    {Object.keys(AuthTarget).map(key => (
-                      <option value={key.toLowerCase()} key={key}>
-                        {key}
-                      </option>
-                    ))}
-                  </select>
+                    values={AuthTarget}
+                    disabled={authTarget != AuthTarget.AWS}
+                  />
                 </div>
                 <div className="col-sm-12 col-md-6">
-                  <select
+                  <Select
                     defaultValue={WLDevProfiles.Programmatic}
                     onChange={ev =>
                       setProfile(WLDevProfiles[ev.target.value as keyof typeof WLDevProfiles])
                     }
                     name="authType"
-                    required
-                    className="form-select"
                     id="aws-profile"
-                    aria-label="Default select example"
                     disabled={authTarget != AuthTarget.AWS}
-                  >
-                    <option value={WLDevProfiles.Programmatic} key={WLDevProfiles.Programmatic}>
+                    values={WLDevProfiles.Programmatic}
+                  />
+                  {/* <option value={WLDevProfiles.Programmatic} key={WLDevProfiles.Programmatic}>
                       Programmatic Access
-                    </option>
-                  </select>
+                    </option> */}
                 </div>
-                <div className="col-sm-12 col-md-4"></div>
               </div>
               <div className="row align-items-center pt-3">
-                <Label htmlFor="aws-region" className="col-form-label" text="Region" />
+                <Label htmlFor="aws-region" text="Region" />
                 <div className="col-sm-12 col-md-6">
-                  <select
+                  <Select
                     defaultValue={AuthRegion.EU_West_1}
                     onChange={ev =>
                       setAuthRegion(AuthRegion[ev.target.value as keyof typeof AuthRegion])
                     }
                     name="authRegion"
-                    required
-                    className="form-select"
                     id="authRegion"
                     aria-label="Default select example"
                     disabled={authTarget != AuthTarget.AWS}
-                  >
-                    {Object.values(AuthRegion).map(key => (
-                      <option value={key} key={key}>
-                        {key}
-                      </option>
-                    ))}
-                  </select>
+                    values={AuthRegion}
+                  />
                 </div>
-                <Span id="aws-region" className="form-text" text="Aws Region" />
+                <Span id="aws-region" text="Aws Region" />
               </div>
               {profile === WLDevProfiles.Programmatic ? (
                 <>
                   <div className="row align-items-center pt-3">
-                    <Label htmlFor="aws-key" className="col-form-label" text="Key" />
+                    <Label htmlFor="aws-key" text="Key" />
                     <Input
                       type="text"
                       id="aws-key"
                       onChange={ev => setKey(ev.target.value)}
                       disabled={authTarget != AuthTarget.AWS}
                     />
-                    <Span id="aws-key-helper" className="form-text" text="AWS Key Id" />
+                    <Span id="aws-key-helper" text="AWS Key Id" />
                   </div>
                   <div className="row align-items-center pt-3">
-                    <Label htmlFor="aws-key-secret" className="col-form-label" text="Secret" />
+                    <Label htmlFor="aws-key-secret" text="Secret" />
                     <Input
                       type="password"
                       onChange={ev => setSecret(ev.target.value)}
                       id="aws-key-secret"
                       disabled={authTarget != AuthTarget.AWS}
                     />
-                    <Span id="aws-secret-helper" className="form-text" text="AWS Key Secret" />
+                    <Span id="aws-secret-helper" text="AWS Key Secret" />
                   </div>
                 </>
               ) : null}

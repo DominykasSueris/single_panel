@@ -6,11 +6,11 @@ interface SelectProps {
   onChange: (input: any) => void;
   name: string;
   id: string;
-  disabled?: boolean;
-  values: WLDevProfiles | AuthTarget | AuthRegion;
+  disabled: boolean;
+  values: any;
 }
 
-const Select = ({ defaultValue, onChange, name, id, disabled }: SelectProps) => {
+const Select = ({ defaultValue, onChange, name, id, values, disabled }: SelectProps) => {
   return (
     <select
       defaultValue={defaultValue}
@@ -22,6 +22,11 @@ const Select = ({ defaultValue, onChange, name, id, disabled }: SelectProps) => 
       aria-label="Default select example"
       disabled={disabled}
     >
+      {Object.keys(values).map(key => (
+        <option value={key.toLowerCase()} key={key}>
+          {key}
+        </option>
+      ))}
       ))
     </select>
   );
