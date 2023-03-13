@@ -1,13 +1,12 @@
 interface SpanProps {
   id: string;
-  className: string;
   text: string;
 }
 
-const Span = ({ id, className, text }: SpanProps) => {
+const Span = ({ id, text }: SpanProps) => {
   return (
     <div className="col-sm-12 col-md-4">
-      <span id={id} className={className}>
+      <span id={id} className="form-text">
         {text}
       </span>
     </div>
