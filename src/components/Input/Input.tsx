@@ -4,7 +4,7 @@ interface InputProps {
   id: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   type: string;
-  disabled?: boolean;
+  disabled: boolean;
 }
 
 const Input = ({ id, onChange, type, disabled }: InputProps) => {
