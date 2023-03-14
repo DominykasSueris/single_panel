@@ -1,17 +1,7 @@
-import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
-import { AuthTarget } from "../../../redux/specs/authSpecs";
-import { RootState } from "../../../redux/store";
 import ComingSoonAlert from "../../Alert/AlertComingSoon";
 
 const Azure = () => {
-  const isAuth = useSelector((state: RootState) => {
-    return state.auth.current?.provider === AuthTarget.Azure;
-  });
-
-  return isAuth ? (
-    <Outlet></Outlet>
-  ) : (
+  return (
     <div>
       <div className="mt-5 mb-5">
         <div className="mt-4 p-5 bg-info text-white rounded">

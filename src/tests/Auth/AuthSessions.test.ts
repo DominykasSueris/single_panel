@@ -1,6 +1,6 @@
 import { AuthSessions } from "services/AuthSessions";
 import { AuthRegion, AuthTarget } from "redux/specs/authSpecs";
-import { WLDevProfiles } from "components/Auth/Login";
+import { LoginConfig, WLDevProfiles } from "components/Auth/Login";
 
 beforeEach(() => {
   window.sessionStorage.clear();
@@ -21,11 +21,12 @@ test("test if getMethod are parsed to string if more than one value", () => {
   expect(AuthSessions.getMethods()).toStrictEqual([{ master_key: "cat", late_convenience: "dog" }]);
 });
 test("test if setMethods updates sessionStorage ", () => {
-  const method = {
-    id: "1",
-    type: WLDevProfiles.Programmatic,
-    provider: AuthTarget.AWS,
-    region: AuthRegion.Africa
+  const method: LoginConfig = {
+    type: WLDevProfiles.PROGRAMMATIC,
+    target: AuthTarget.aws,
+    region: AuthRegion["eu-central-1"],
+    key: "asd",
+    secret: "secret"
   };
   AuthSessions.setMethods([method]);
   const item = window.sessionStorage.getItem("auth_methods");
@@ -34,17 +35,19 @@ test("test if setMethods updates sessionStorage ", () => {
   expect(item).toStrictEqual(expectedResults);
 });
 test("test if updateMethods updates sessionStorage", () => {
-  const method1 = {
-    id: "1",
-    type: WLDevProfiles.Programmatic,
-    provider: AuthTarget.AWS,
-    region: AuthRegion.Africa
+  const method1: LoginConfig = {
+    type: WLDevProfiles.PROGRAMMATIC,
+    target: AuthTarget.aws,
+    region: AuthRegion["eu-west-1"],
+    key: "asd",
+    secret: "secret"
   };
-  const method2 = {
-    id: "2",
-    type: WLDevProfiles.Programmatic,
-    provider: AuthTarget.AWS,
-    region: AuthRegion.Africa
+  const method2: LoginConfig = {
+    type: WLDevProfiles.PROGRAMMATIC,
+    target: AuthTarget.aws,
+    region: AuthRegion["eu-west-3"],
+    key: "asd",
+    secret: "secret"
   };
   AuthSessions.setMethods([method1]);
   AuthSessions.updateMethods(method2);
