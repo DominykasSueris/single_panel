@@ -11,24 +11,33 @@ interface InputProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FormInput = (props: InputProps) => {
+const FormInput = ({
+  id,
+  type,
+  label,
+  value,
+  placeholder,
+  required,
+  disabled,
+  onChange
+}: InputProps) => {
   return (
     <div className="row align-items-center p-2">
       <div className="col-sm-12 col-md-3">
-        <label htmlFor={props.id} className="col-form-label">
-          {props.label}
+        <label htmlFor={id} className="col-form-label">
+          {label}
         </label>
       </div>
       <div className="col-sm-12 col-md-6">
         <input
-          id={props.id}
-          value={props.value}
-          placeholder={props.placeholder}
-          type={props.type ? props.type : "text"}
-          onChange={props.onChange}
+          id={id}
+          value={value}
+          placeholder={placeholder}
+          type={type ? type : "text"}
+          onChange={onChange}
           className="form-control"
-          required={props.required ? props.required : true}
-          disabled={props.disabled ? props.disabled : false}
+          required={required ? required : true}
+          disabled={disabled ? disabled : false}
         ></input>
       </div>
     </div>

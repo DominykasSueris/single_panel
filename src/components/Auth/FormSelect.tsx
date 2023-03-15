@@ -10,24 +10,24 @@ interface SelectProps {
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const FormSelect = (props: SelectProps) => {
+const FormSelect = ({ id, label, options, value, required, disabled, onChange }: SelectProps) => {
   return (
     <div className="row align-items-center p-2">
       <div className="col-sm-12 col-md-3">
-        <label htmlFor={props.id} className="col-form-label">
-          {props.label}
+        <label htmlFor={id} className="col-form-label">
+          {label}
         </label>
       </div>
       <div className="col-sm-12 col-md-6">
         <select
-          id={props.id}
-          value={props.value}
-          onChange={props.onChange}
+          id={id}
+          value={value}
+          onChange={onChange}
           className="form-select"
-          required={props.required ? props.required : true}
-          disabled={props.disabled ? props.disabled : false}
+          required={required ? required : true}
+          disabled={disabled ? disabled : false}
         >
-          {props.options.map(option => (
+          {options.map(option => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
