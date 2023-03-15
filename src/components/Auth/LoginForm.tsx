@@ -49,59 +49,63 @@ const LoginForm = ({
   };
 
   return (
-    <form className="card" onSubmit={handleSubmit}>
-      <div className="card-header">
-        <p className="mb-0">Cloud Authentication</p>
-      </div>
-      <div className="card-body">
-        <FormSelect
-          id="authTarget"
-          label="Provider"
-          options={convertEnumToOptions(AuthTarget)}
-          value={loginData.authTarget}
-          onChange={handleChange}
-          disabled
-        />
-        <FormSelect
-          id="authProfile"
-          label="Profile"
-          options={convertEnumToOptions(WLDevProfiles)}
-          value={loginData.authProfile}
-          onChange={handleChange}
-          disabled
-        />
-        <FormSelect
-          id="authRegion"
-          label="Region"
-          options={convertEnumToOptions(AuthRegion)}
-          value={loginData.authRegion}
-          onChange={handleChange}
-        />
-
-        <FormInput
-          id="key"
-          label="Key"
-          value={loginData.key}
-          placeholder="YourKey"
-          onChange={handleChange}
-        />
-        <FormInput
-          id="secret"
-          label="Secret"
-          type="password"
-          placeholder="VerySecurePassword"
-          value={loginData.secret}
-          onChange={handleChange}
-        />
-        <div className="row">
-          <div className="col-sm-12 col-md-8 text-right pt-3">
-            <button className="btn btn-primary">
-              {loginData.authProfile === "PROGRAMMATIC" ? "Authenticate" : "Connect"}
-            </button>
+    <div className="row pt-5">
+      <div className="col-sm-12 col-md-6 offset-md-3">
+        <form className="card" onSubmit={handleSubmit}>
+          <div className="card-header">
+            <p className="mb-0">Cloud Authentication</p>
           </div>
-        </div>
+          <div className="card-body">
+            <FormSelect
+              id="authTarget"
+              label="Provider"
+              options={convertEnumToOptions(AuthTarget)}
+              value={loginData.authTarget}
+              onChange={handleChange}
+              disabled
+            />
+            <FormSelect
+              id="authProfile"
+              label="Profile"
+              options={convertEnumToOptions(WLDevProfiles)}
+              value={loginData.authProfile}
+              onChange={handleChange}
+              disabled
+            />
+
+            <FormSelect
+              id="authRegion"
+              label="Region"
+              options={convertEnumToOptions(AuthRegion)}
+              value={loginData.authRegion}
+              onChange={handleChange}
+            />
+            <FormInput
+              id="key"
+              label="Key"
+              value={loginData.key}
+              placeholder="YourKey"
+              onChange={handleChange}
+            />
+            <FormInput
+              id="secret"
+              label="Secret"
+              type="password"
+              placeholder="VerySecurePassword"
+              value={loginData.secret}
+              onChange={handleChange}
+            />
+            <div className="row">
+              <div className="col-sm-12 col-md-8 text-right pt-3">
+                <button className="btn btn-primary">
+                  {loginData.authProfile === "PROGRAMMATIC" ? "Authenticate" : "Connect"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 };
 
