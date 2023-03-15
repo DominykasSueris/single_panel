@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
-/** Redux */
-import { AuthTarget } from "redux/specs/authSpecs";
-
 /** Cloud Services */
 import { configClient } from "services/aws/aws";
 
 /** Components  */
-import Login, { LoginConfig } from "components/Auth/Login";
+import Login from "components/Auth/Login";
 
 /** Services */
 import { AuthSessions } from "services/AuthSessions";
+import { LoginData } from "components/Auth/LoginForm";
 
 const AwsAuth = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -19,7 +17,7 @@ const AwsAuth = () => {
   const syncClients = async () => {
     const methods = AuthSessions.getMethods();
     for (const method of methods) {
-      await configClient(method.key, method.secret, method.region);
+      await configClient(method.key, method.secret, method.authTarget);
     }
   };
 
@@ -29,7 +27,7 @@ const AwsAuth = () => {
 
   useEffect(() => {
     const methods = AuthSessions.getMethods();
-    if (methods.filter((method: LoginConfig) => method.target === AuthTarget.aws).length > 0) {
+    if (methods.filter((method: LoginData) => method.authTarget === "aws").length > 0) {
       setIsAuth(true);
     } else {
       setIsAuth(false);

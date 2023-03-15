@@ -1,22 +1,19 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 /** Services */
 import { AuthSessions } from "services/AuthSessions";
-import { LoginConfig } from "components/Auth/Login";
+
+/**Specs */
+import { Session } from "components/Auth/Login";
 
 const AwsAccounts = () => {
+  const [loginMethods, setLoginMethods] = useState<Session[]>(AuthSessions.getMethods());
 
-  const loginMethods = AuthSessions.getMethods()
-
-  const disconnect = (method: LoginConfig) => {
-    const existingMethods = AuthSessions.getMethods();
-    const remainingConnections = existingMethods.filter(
-      existingMethod => existingMethod.key !== method.key
-    );
-    // if (method.tag) CloudWatch.removeWatcher(method.tag);
-    AuthSessions.setMethods(remainingConnections);
+  const deleteMethods = (tag: string) => {
+    AuthSessions.deleteMethods(tag);
+    setLoginMethods(AuthSessions.getMethods());
   };
-
   return (
     <div className="container mt-3">
       <div className="mt-5 mb-5">
@@ -38,18 +35,17 @@ const AwsAccounts = () => {
         </Link>
       </div>
       <ul className="list-group">
-        {loginMethods.map((method: LoginConfig) =>
+        {loginMethods.map((method: Session) => (
           <li className="list-group-item container" key={method.key}>
             <div className="row align-items-center">
               <div className="col-9">
                 <p className="mb-0">
-                  {/* {method.tag} - <strong>{method.type}</strong> */}
-                  tagas?
+                  {method.tag} - <strong>{method.tag}</strong>
                 </p>
               </div>
               <div className="col-3 text-right">
                 <button
-                  onClick={() => disconnect(method)}
+                  onClick={() => deleteMethods(method.tag)}
                   type="button"
                   className="btn btn-danger"
                 >
@@ -58,8 +54,7 @@ const AwsAccounts = () => {
               </div>
             </div>
           </li>
-        )
-        }
+        ))}
       </ul>
     </div>
   );
