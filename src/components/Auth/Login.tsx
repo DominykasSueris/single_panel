@@ -1,15 +1,9 @@
-import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router";
-
-/**Components */
 import LoginForm, { LoginData } from "components/Auth/LoginForm";
-
-/** Cloud Services */
 import { configClient } from "services/aws/aws";
 import { CloudWatch } from "services/aws/aws";
-
-/** Services */
-import { AuthSessions } from "services/AuthSessions";
+import { useContext } from "react";
+import { AuthContext } from "components/Providers/AWS/AwsAuth";
 
 export enum WLDevProfiles {
   DEV = "Dev",
@@ -17,16 +11,13 @@ export enum WLDevProfiles {
   CREDS = "Creds"
 }
 
-interface LoginProps {
-  isAuth?: boolean;
-}
-
 export interface Session extends LoginData {
   tag: string;
 }
 
-const Login = ({ isAuth }: LoginProps) => {
+const Login = () => {
   const navigate = useNavigate();
+  const { addSession } = useContext(AuthContext);
 
   const handleLogin = async (loginData: LoginData) => {
     const isConnected = await configClient(loginData.key, loginData.secret, loginData.authRegion);
@@ -45,12 +36,12 @@ const Login = ({ isAuth }: LoginProps) => {
       tag: tag
     };
 
-    AuthSessions.updateMethods(session);
+    addSession(session);
 
     navigate(`/${loginData.authTarget}`);
   };
 
-  return isAuth ? <Outlet></Outlet> : <LoginForm handleSubmit={handleLogin} />;
+  return <LoginForm handleSubmit={handleLogin} />;
 };
 
 export default Login;

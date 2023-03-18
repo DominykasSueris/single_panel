@@ -1,18 +1,30 @@
-import { useState, useEffect } from "react";
+import { useEffect, createContext, useState } from "react";
 import { Outlet } from "react-router-dom";
-
-/** Cloud Services */
 import { configClient } from "services/aws/aws";
-
-/** Components  */
-import Login from "components/Auth/Login";
-
-/** Services */
+import Login, { Session } from "components/Auth/Login";
 import { AuthSessions } from "services/AuthSessions";
-import { LoginData } from "components/Auth/LoginForm";
+
+interface AuthContextProperties {
+  sessions: Session[];
+  addSession: (session: Session) => void;
+  deleteSession: (tag: string) => void;
+}
+
+export const AuthContext = createContext<AuthContextProperties>({} as AuthContextProperties);
 
 const AwsAuth = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [sessions, setSessions] = useState<Session[]>(AuthSessions.getMethods());
+
+  const addSession = (session: Session) => {
+    AuthSessions.updateMethods(session);
+    sessions.push(session);
+  };
+
+  const deleteSession = (tag: string) => {
+    const remainingConnections = sessions.filter(session => session.tag !== tag);
+    AuthSessions.deleteMethods(tag);
+    setSessions(remainingConnections);
+  };
 
   const syncClients = async () => {
     const methods = AuthSessions.getMethods();
@@ -25,16 +37,13 @@ const AwsAuth = () => {
     syncClients();
   }, []);
 
-  useEffect(() => {
-    const methods = AuthSessions.getMethods();
-    if (methods.filter((method: LoginData) => method.authTarget === "aws").length > 0) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
-    }
-  }, []);
-
-  return isAuth ? <Outlet></Outlet> : <Login isAuth={isAuth} />;
+  return (
+    <AuthContext.Provider
+      value={{ sessions: sessions, addSession: addSession, deleteSession: deleteSession }}
+    >
+      {sessions ? <Outlet></Outlet> : <Login />}
+    </AuthContext.Provider>
+  );
 };
 
 export default AwsAuth;

@@ -1,19 +1,11 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-
-/** Services */
-import { AuthSessions } from "services/AuthSessions";
-
-/**Specs */
+import { useContext } from "react";
 import { Session } from "components/Auth/Login";
+import { AuthContext } from "components/Providers/AWS/AwsAuth";
 
 const AwsAccounts = () => {
-  const [loginMethods, setLoginMethods] = useState<Session[]>(AuthSessions.getMethods());
+  const { deleteSession, sessions } = useContext(AuthContext);
 
-  const deleteMethods = (tag: string) => {
-    AuthSessions.deleteMethods(tag);
-    setLoginMethods(AuthSessions.getMethods());
-  };
   return (
     <div className="container mt-3">
       <div className="mt-5 mb-5">
@@ -35,7 +27,7 @@ const AwsAccounts = () => {
         </Link>
       </div>
       <ul className="list-group">
-        {loginMethods.map((method: Session) => (
+        {sessions.map((method: Session) => (
           <li className="list-group-item container" key={method.key}>
             <div className="row align-items-center">
               <div className="col-9">
@@ -45,7 +37,7 @@ const AwsAccounts = () => {
               </div>
               <div className="col-3 text-right">
                 <button
-                  onClick={() => deleteMethods(method.tag)}
+                  onClick={() => deleteSession(method.tag)}
                   type="button"
                   className="btn btn-danger"
                 >
