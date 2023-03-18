@@ -5,7 +5,7 @@ import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 
 /**Specs */
-import { AuthTarget, AuthRegion } from "redux/specs/authSpecs";
+import { AuthTarget, AuthRegion } from "services/aws/authSpecs";
 import { WLDevProfiles } from "components/Auth/Login";
 
 export interface LoginData {

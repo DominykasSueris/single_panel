@@ -25,7 +25,7 @@ export enum AuthRegion {
   "eu-central-1" = "Europe central",
   "eu-west-1" = "Europe west 1",
   "eu-west-2" = "Europe west 2",
-  "eu-west-3" = "Europe west 3",
+  "eu-west-3" = "Europe west 3"
   // EU_South_1 = "eu-south-1",
   // EU_North_1 = "eu-north-1",
   // ME_South_1 = "me-south-1",
