@@ -13,23 +13,23 @@ interface AuthContextProperties {
 export const AuthContext = createContext<AuthContextProperties>({} as AuthContextProperties);
 
 const AwsAuth = () => {
-  const [sessions, setSessions] = useState<Session[]>(AuthSessions.getMethods());
+  const [sessions, setSessions] = useState<Session[]>(AuthSessions.getConnections());
 
   const addSession = (session: Session) => {
-    AuthSessions.updateMethods(session);
+    AuthSessions.updateConnections(session);
     sessions.push(session);
   };
 
   const deleteSession = (tag: string) => {
     const remainingConnections = sessions.filter(session => session.tag !== tag);
-    AuthSessions.deleteMethods(tag);
+    AuthSessions.deleteConnections(tag);
     setSessions(remainingConnections);
   };
 
   const syncClients = async () => {
-    const methods = AuthSessions.getMethods();
-    for (const method of methods) {
-      await configClient(method.key, method.secret, method.authTarget);
+    const connections = AuthSessions.getConnections();
+    for (const connection of connections) {
+      await configClient(connection.key, connection.secret, connection.authTarget);
     }
   };
 
