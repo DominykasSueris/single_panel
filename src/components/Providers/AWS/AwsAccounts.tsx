@@ -1,34 +1,10 @@
-import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
-/** Redux */
-import { RootState } from "redux/store";
-import { AuthTarget, IProfile } from "redux/specs/authSpecs";
-import { updateConnections } from "redux/reducers/auth";
-import { SyncAuthMethods } from "redux/actions/authActions";
-
-/** Cloud Services */
-import { CloudWatch } from "services/aws/aws";
-
-/** Services */
-import { AuthSessions } from "services/AuthSessions";
+import { useContext } from "react";
+import { Session } from "components/Auth/Login";
+import { AuthContext } from "components/Providers/AWS/AwsAuth";
 
 const AwsAccounts = () => {
-  const dispatch = useDispatch();
-
-  const loginMethods = useSelector((state: RootState) => {
-    return state.auth.methods.filter((method: IProfile) => method.provider === AuthTarget.AWS);
-  });
-
-  const disconnect = (method: IProfile) => {
-    const existingMethods = AuthSessions.getMethods();
-    const remainingConnections = existingMethods.filter(
-      existingMethod => existingMethod.id !== method.id
-    );
-    if (method.tag) CloudWatch.removeWatcher(method.tag);
-    AuthSessions.setMethods(remainingConnections);
-    dispatch(updateConnections(SyncAuthMethods(remainingConnections)));
-  };
+  const { deleteSession, sessions } = useContext(AuthContext);
 
   return (
     <div className="container mt-3">
@@ -51,28 +27,26 @@ const AwsAccounts = () => {
         </Link>
       </div>
       <ul className="list-group">
-        {loginMethods.map((method: IProfile) => {
-          return (
-            <li className="list-group-item container" key={method.id}>
-              <div className="row align-items-center">
-                <div className="col-9">
-                  <p className="mb-0">
-                    {method.tag} - <strong>{method.type}</strong>
-                  </p>
-                </div>
-                <div className="col-3 text-right">
-                  <button
-                    onClick={() => disconnect(method)}
-                    type="button"
-                    className="btn btn-danger"
-                  >
-                    Disconnect
-                  </button>
-                </div>
+        {sessions.map((method: Session) => (
+          <li className="list-group-item container" key={method.key}>
+            <div className="row align-items-center">
+              <div className="col-9">
+                <p className="mb-0">
+                  {method.tag} - <strong>{method.tag}</strong>
+                </p>
               </div>
-            </li>
-          );
-        })}
+              <div className="col-3 text-right">
+                <button
+                  onClick={() => deleteSession(method.tag)}
+                  type="button"
+                  className="btn btn-danger"
+                >
+                  Disconnect
+                </button>
+              </div>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
   );

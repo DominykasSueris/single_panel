@@ -1,55 +1,49 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, createContext, useState } from "react";
 import { Outlet } from "react-router-dom";
-
-/** Redux */
-import { RootState } from "redux/store";
-import { AuthTarget, IProfile } from "redux/specs/authSpecs";
-
-/** Cloud Services */
 import { configClient } from "services/aws/aws";
-
-/** Components  */
-import Login from "components/Auth/Login";
-import Spinner from "components/Spinner/Spinner";
-
-/** Services */
+import Login, { Session } from "components/Auth/Login";
 import { AuthSessions } from "services/AuthSessions";
 
+interface AuthContextProperties {
+  sessions: Session[];
+  addSession: (session: Session) => void;
+  deleteSession: (tag: string) => void;
+}
+
+export const AuthContext = createContext<AuthContextProperties>({} as AuthContextProperties);
+
 const AwsAuth = () => {
-  const [isAuth, setIsAuth] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const auth = useSelector((state: RootState) => {
-    const auths = state.auth.methods?.filter(
-      (method: IProfile) => method.provider === AuthTarget.AWS
-    );
-    return auths.length > 0;
-  });
+  const [sessions, setSessions] = useState<Session[]>(AuthSessions.getConnections());
+
+  const addSession = (session: Session) => {
+    AuthSessions.updateConnections(session);
+    sessions.push(session);
+  };
+
+  const deleteSession = (tag: string) => {
+    const remainingConnections = sessions.filter(session => session.tag !== tag);
+    AuthSessions.deleteConnections(tag);
+    setSessions(remainingConnections);
+  };
 
   const syncClients = async () => {
-    const methods = AuthSessions.getMethods();
-    for (const method of methods) {
-      await configClient(method.key, method.secret, method.region);
+    const connections = AuthSessions.getConnections();
+    for (const connection of connections) {
+      await configClient(connection.key, connection.secret, connection.authTarget);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
     syncClients();
   }, []);
 
-  useEffect(() => {
-    if (auth) return setIsAuth(true);
-
-    const methods = AuthSessions.getMethods();
-    if (methods.filter((method: IProfile) => method.provider === AuthTarget.AWS).length > 0) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
-    }
-  }, [auth]);
-
-  return isAuth && !loading ? <Outlet></Outlet> : loading ? <Spinner /> : <Login isAuth={isAuth} />;
+  return (
+    <AuthContext.Provider
+      value={{ sessions: sessions, addSession: addSession, deleteSession: deleteSession }}
+    >
+      {sessions ? <Outlet></Outlet> : <Login />}
+    </AuthContext.Provider>
+  );
 };
 
 export default AwsAuth;

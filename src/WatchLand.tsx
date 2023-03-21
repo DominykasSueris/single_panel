@@ -22,15 +22,15 @@ const WatchLand = () => {
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="*" element={<NotFoundPage />}></Route>
-          <Route path="/aws">
-            <Route element={<AwsAuth />}>
+          <Route element={<AwsAuth />}>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/aws">
               <Route index element={<AwsAccounts />}></Route>
               <Route path="groups" element={<AwsGroups />}></Route>
               <Route path="streams" element={<AwsStreams />}></Route>
               <Route path="logs" element={<AwsLogs />}></Route>
             </Route>
           </Route>
-          <Route path="/login" element={<Login />}></Route>
           <Route path="/azure" element={<Azure />}></Route>
           <Route path="/google" element={<GoogleCloud />}></Route>
         </Routes>

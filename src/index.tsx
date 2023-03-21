@@ -1,19 +1,15 @@
 import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
 import "./index.css";
 import WatchLand from "./WatchLand";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <WatchLand />
-    </BrowserRouter>
-  </Provider>
+  <BrowserRouter>
+    <WatchLand />
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

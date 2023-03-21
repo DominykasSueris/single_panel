@@ -1,24 +1,34 @@
-import { IProfile } from "redux/specs/authSpecs";
+import { Session } from "components/Auth/Login";
+import { CloudWatch } from "./aws/aws";
 
 export class AuthSessions {
-  static session_methods_key = "auth_methods";
+  static session_connections_key = "auth_methods";
 
-  static getMethods() {
-    const sessionMethods = window.sessionStorage.getItem(this.session_methods_key);
-    if (!sessionMethods) return [];
-    const methods = [...JSON.parse(sessionMethods)];
-    return methods;
+  static getConnections(): Session[] {
+    const sessionConnections = window.sessionStorage.getItem(this.session_connections_key);
+    if (!sessionConnections) return [];
+    const connections = [...JSON.parse(sessionConnections)];
+    return connections;
   }
 
-  static setMethods(methods: IProfile[]) {
+  static setConnections(connections: Session[]) {
     const sessionStorage = window.sessionStorage;
-    const methodsString = JSON.stringify(methods);
-    sessionStorage.setItem(this.session_methods_key, methodsString);
+    const connectionsString = JSON.stringify(connections);
+    sessionStorage.setItem(this.session_connections_key, connectionsString);
   }
 
-  static updateMethods(method: IProfile) {
-    const sessionMethods = this.getMethods();
-    sessionMethods.push(method);
-    this.setMethods(sessionMethods);
+  static updateConnections(connection: Session) {
+    const sessionConnections = this.getConnections();
+    sessionConnections.push(connection);
+    this.setConnections(sessionConnections);
+  }
+
+  static deleteConnections(tag: string) {
+    const existingConnections = AuthSessions.getConnections();
+    const remainingConnections = existingConnections.filter(
+      existingConnection => existingConnection.tag !== tag
+    );
+    CloudWatch.removeWatcher(tag);
+    AuthSessions.setConnections(remainingConnections);
   }
 }
