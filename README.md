@@ -30,3 +30,6 @@ Terminal: `docker pull dominykassueris/watch_land:latest`
 
 Run docker image locally: `sh ./run.sh` 
 
+<img width="1440" alt="Screenshot 2023-05-07 at 16 46 05" src="https://user-images.githubusercontent.com/77460042/236688075-f5716eed-6d2c-4fa6-b6d8-4c5d469d4c3c.png">
+
+
