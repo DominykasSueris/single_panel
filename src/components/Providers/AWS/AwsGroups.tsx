@@ -7,24 +7,27 @@ import { IAwsLogGroups } from "services/aws/spec";
 /** Components  */
 import BackButton from "components/Buttons/BackButton";
 import SearchBar from "components/SearchBar/SearchBar";
-// import Pagination from "components/Pagination/Pagination";
+import Pagination from "components/Pagination/Pagination";
 import Spinner from "components/Spinner/Spinner";
 import AlertError from "components/Alert/AlertError";
 import Table from "components/Table/Table";
 import AwsGroupsRow from "components/Table/AwsTableRows/AwsGroupsRow";
 
 /** Utils */
-// import { arrays } from "utils/";
-import { useCloudWatch } from "utils/hooks";
+import { useCloudWatch, useQuery } from "utils/hooks";
+import { sliceArray, getNumberOfPages } from "utils/arrays";
 
 const AwsGroups = () => {
-  // const page = Number(useQuery().get("page") || "1");
+  const qsParams = useQuery();
+  const page = Number(qsParams.get("page") || "1");
+  const [currentPage, setCurrentPage] = useState<number>(page);
   const [filterQuery, setFilterQuery] = useState<string>("");
 
   const { data: groups, loading, error } = useCloudWatch<IAwsLogGroups>(CloudWatch.groups());
 
   const filterByGroupName = (groupName: string) => {
-    return groups.filter(group => group.logGroupName.includes(groupName));
+    const result = groups.filter(group => group.logGroupName.includes(groupName));
+    return sliceArray(result, currentPage);
   };
 
   if (error) return <AlertError />;
@@ -43,7 +46,12 @@ const AwsGroups = () => {
         items={filterByGroupName(filterQuery)}
         resourceName="group"
       />
-      {/* <Pagination active={page} pageCount={arrays.getNumberOfPages(filteredGroups)} /> fix it */}
+      <Pagination
+        active={currentPage}
+        totalPages={getNumberOfPages(groups)}
+        currentPage={currentPage}
+        onPageChange={(page: number) => setCurrentPage(page)}
+      />
     </>
   );
 };
