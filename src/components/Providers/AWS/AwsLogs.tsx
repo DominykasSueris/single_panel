@@ -19,7 +19,6 @@ import { useCloudWatch, useQuery } from "utils/hooks";
 
 const AwsLogs = () => {
   const groupName = useQuery().get("group") || "";
-
   const [page, setPage] = useState<number>(1);
   const [filterQuery, setFilterQuery] = useState<string>("");
   const {
@@ -55,9 +54,10 @@ const AwsLogs = () => {
         resourceName="log"
       />
       <Pagination
+        active={page}
         currentPage={page}
         onPageChange={(page: number) => setPage(page)}
-        totalPage={getNumberOfPages(logs)}
+        totalPages={getNumberOfPages(logs)}
       />
     </>
   );
