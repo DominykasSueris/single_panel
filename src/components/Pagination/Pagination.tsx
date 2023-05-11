@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Pagination.scss";
 
 interface IPaginationProps {
   currentPage: number;
@@ -47,7 +48,7 @@ const Pagination = ({ currentPage, onPageChange, totalPages }: IPaginationProps)
 
   return (
     <nav aria-label="Logs navigation">
-      <ul className="pagination justify-content-center">
+      <ul className="pagination">
         <li className={`${currentPage === 1 ? "page-item disabled" : "page-item"}`}>
           <a className="page-link" href="#" aria-label="Previous" onClick={() => previousPage()}>
             <span aria-hidden="true">&laquo;</span>
