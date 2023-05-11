@@ -33,6 +33,7 @@ const AwsAuth = () => {
     const connections = AuthSessions.getConnections();
     for (const connection of connections) {
       await configClient(connection.key, connection.secret, connection.authRegion);
+      setActiveConnections(true);
     }
   };
 
