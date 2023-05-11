@@ -1,4 +1,3 @@
-// import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 
 interface IPaginationProps {
@@ -9,23 +8,7 @@ interface IPaginationProps {
 }
 
 const Pagination = ({ active, currentPage, onPageChange, totalPages }: IPaginationProps) => {
-  // const page = useQuery().get("page") || active;
   const [activePage, setActivePage] = useState(currentPage);
-  // const [searchParams, setSearchParams] = useSearchParams();
-
-  // const goToPage = (p: number) => {
-  //   const params = new URLSearchParams();
-  //   params.set("page", `${p}`);
-  //   searchParams.forEach((value, key) => {
-  //     // Check that the key is not already present
-  //     if (!params.has(key)) {
-  //       // TODO - make querystring params user friendly
-  //       params.set(key, value);
-  //     }
-  //   });
-  //   setActivePage(p);
-  //   setSearchParams(params);
-  // };
 
   const previousPage = () => {
     const previousPage = currentPage - 1 <= 0 ? currentPage : currentPage - 1;

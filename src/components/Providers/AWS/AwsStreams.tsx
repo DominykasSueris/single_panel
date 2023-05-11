@@ -15,7 +15,7 @@ import AwsStreamsRow from "components/Table/AwsTableRows/AwsStreamsRow";
 
 /** Utils */
 import { useCloudWatch, useQuery } from "utils/hooks";
-import { getNumberOfPages } from "utils/arrays";
+import { getNumberOfPages, sliceArray } from "utils/arrays";
 import Pagination from "components/Pagination/Pagination";
 // import { arrays } from "utils/";
 
@@ -38,7 +38,8 @@ const AwsStreams = () => {
   if (loading) return <Spinner />;
 
   const filterByStreamName = (streamName: string) => {
-    return streams.filter(stream => stream.logStreamName.includes(streamName));
+    const result = streams.filter(stream => stream.logStreamName.includes(streamName));
+    return sliceArray(result, currentPage);
   };
 
   return (
@@ -54,7 +55,7 @@ const AwsStreams = () => {
         resourceName="stream"
       />
       <Pagination
-        active={page}
+        active={currentPage}
         currentPage={currentPage}
         totalPages={getNumberOfPages(streams)}
         onPageChange={(page: number) => setCurrentPage(page)}
