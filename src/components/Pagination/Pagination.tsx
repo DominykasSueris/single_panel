@@ -46,7 +46,7 @@ const Pagination = ({ currentPage, onPageChange, totalPages }: IPaginationProps)
     ];
   };
 
-  return (
+  return totalPages <= 1 ? null : (
     <nav aria-label="Logs navigation">
       <ul className="pagination">
         <li className={`${currentPage === 1 ? "page-item disabled" : "page-item"}`}>
