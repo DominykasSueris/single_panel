@@ -1,35 +1,46 @@
-import { useSearchParams } from "react-router-dom";
+// import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
 
-/** Utils */
-import { useQuery } from "utils/hooks";
-
 interface IPaginationProps {
-  active: number;
-  pageCount: number;
+  active?: number;
+  currentPage: number;
+  onPageChange: (page: number) => void;
+  totalPages: number;
 }
 
-const Pagination = ({ active, pageCount }: IPaginationProps) => {
-  const page = useQuery().get("page") || active;
-  const [activePage, setActivePage] = useState(page);
-  const [searchParams, setSearchParams] = useSearchParams();
+const Pagination = ({ active, currentPage, onPageChange, totalPages }: IPaginationProps) => {
+  // const page = useQuery().get("page") || active;
+  const [activePage, setActivePage] = useState(currentPage);
+  // const [searchParams, setSearchParams] = useSearchParams();
 
-  const goToPage = (p: number) => {
-    const params = new URLSearchParams();
-    params.set("page", `${p}`);
-    searchParams.forEach((value, key) => {
-      // Check that the key is not already present
-      if (!params.has(key)) {
-        // TODO - make querystring params user friendly
-        params.set(key, value);
-      }
-    });
-    setActivePage(p);
-    setSearchParams(params);
+  // const goToPage = (p: number) => {
+  //   const params = new URLSearchParams();
+  //   params.set("page", `${p}`);
+  //   searchParams.forEach((value, key) => {
+  //     // Check that the key is not already present
+  //     if (!params.has(key)) {
+  //       // TODO - make querystring params user friendly
+  //       params.set(key, value);
+  //     }
+  //   });
+  //   setActivePage(p);
+  //   setSearchParams(params);
+  // };
+
+  const previousPage = () => {
+    const previousPage = currentPage - 1 <= 0 ? currentPage : currentPage - 1;
+    setActivePage(previousPage);
+    onPageChange(previousPage);
+  };
+
+  const nextPage = () => {
+    const nextPage = currentPage + 1 > totalPages ? currentPage : currentPage + 1;
+    setActivePage(nextPage);
+    onPageChange(nextPage);
   };
 
   const renderPages = () => {
-    const pageArray = Array.from(Array(pageCount).keys());
+    const pageArray = Array.from(Array(totalPages).keys());
     return [
       ...pageArray.map((pageKey: number) => {
         const p = pageKey + 1;
@@ -40,7 +51,8 @@ const Pagination = ({ active, pageCount }: IPaginationProps) => {
               href="#"
               onClick={ev => {
                 ev.preventDefault();
-                goToPage(p);
+                setActivePage(p);
+                onPageChange(p);
               }}
             >
               {p}
@@ -55,14 +67,14 @@ const Pagination = ({ active, pageCount }: IPaginationProps) => {
     <nav aria-label="Logs navigation">
       <ul className="pagination">
         <li className="page-item">
-          <a className="page-link" href="#" aria-label="Previous">
+          <a className="page-link" href="#" aria-label="Previous" onClick={() => previousPage()}>
             <span aria-hidden="true">&laquo;</span>
             <span className="sr-only">Previous</span>
           </a>
         </li>
         {renderPages()}
         <li className="page-item">
-          <a className="page-link" href="#" aria-label="Next">
+          <a className="page-link" href="#" aria-label="Next" onClick={() => nextPage()}>
             <span aria-hidden="true">&raquo;</span>
             <span className="sr-only">Next</span>
           </a>

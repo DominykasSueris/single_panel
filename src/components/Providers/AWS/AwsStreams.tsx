@@ -15,11 +15,14 @@ import AwsStreamsRow from "components/Table/AwsTableRows/AwsStreamsRow";
 
 /** Utils */
 import { useCloudWatch, useQuery } from "utils/hooks";
+import { getNumberOfPages } from "utils/arrays";
+import Pagination from "components/Pagination/Pagination";
 // import { arrays } from "utils/";
 
 const AwsStreams = () => {
-  // const page = Number(useQuery().get("page") || "1");
+  const page = Number(useQuery().get("page") || "1");
   const groupName = useQuery().get("group") || "";
+  const [currentPage, setCurrentPage] = useState<number>(page);
   const [filterQuery, setFilterQuery] = useState<string>("");
 
   const {
@@ -50,7 +53,12 @@ const AwsStreams = () => {
         items={filterByStreamName(filterQuery)}
         resourceName="stream"
       />
-      {/* <Pagination active={page} pageCount={arrays.getNumberOfPages(filteredStreams)} /> fix it */}
+      <Pagination
+        active={page}
+        currentPage={currentPage}
+        totalPages={getNumberOfPages(streams)}
+        onPageChange={(page: number) => setCurrentPage(page)}
+      />
     </>
   );
 };
