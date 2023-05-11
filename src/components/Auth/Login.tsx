@@ -23,7 +23,7 @@ const Login = () => {
     const isConnected = await configClient(loginData.key, loginData.secret, loginData.authRegion);
 
     if (!isConnected) {
-      alert("connection failed");
+      alert("Connection failed");
       return;
     }
 
