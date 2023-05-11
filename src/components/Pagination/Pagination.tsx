@@ -9,7 +9,10 @@ interface IPaginationProps {
 
 const Pagination = ({ currentPage, onPageChange, totalPages }: IPaginationProps) => {
   const [activePage, setActivePage] = useState(currentPage);
-
+    
+const Pagination = ({currentPage, onPageChange, totalPages }: IPaginationProps) => {
+  const [activePage, setActivePage] = useState(currentPage);
+  
   const previousPage = () => {
     const previousPage = currentPage - 1 <= 0 ? currentPage : currentPage - 1;
     setActivePage(previousPage);
@@ -57,7 +60,7 @@ const Pagination = ({ currentPage, onPageChange, totalPages }: IPaginationProps)
         </li>
         {renderPages()}
         <li className={`${currentPage === totalPages ? "page-item disabled" : "page-item"}`}>
-          <a className="page-link" href="#" aria-label="Next" onClick={() => nextPage()}>
+         <a className="page-link" href="#" aria-label="Next" onClick={() => nextPage()}>
             <span aria-hidden="true">&raquo;</span>
             <span className="sr-only">Next</span>
           </a>
