@@ -7,7 +7,7 @@ import { IAwsStreams } from "services/aws/spec";
 /** Components  */
 import BackButton from "components/Buttons/BackButton";
 import SearchBar from "components/SearchBar/SearchBar";
-// import Pagination from "components/Pagination/Pagination";
+import Pagination from "components/Pagination/Pagination";
 import AlertError from "components/Alert/AlertError";
 import Spinner from "components/Spinner/Spinner";
 import Table from "components/Table/Table";
@@ -16,8 +16,6 @@ import AwsStreamsRow from "components/Table/AwsTableRows/AwsStreamsRow";
 /** Utils */
 import { useCloudWatch, useQuery } from "utils/hooks";
 import { getNumberOfPages, sliceArray } from "utils/arrays";
-import Pagination from "components/Pagination/Pagination";
-// import { arrays } from "utils/";
 
 const AwsStreams = () => {
   const page = Number(useQuery().get("page") || "1");
@@ -55,7 +53,6 @@ const AwsStreams = () => {
         resourceName="stream"
       />
       <Pagination
-        active={currentPage}
         currentPage={currentPage}
         totalPages={getNumberOfPages(streams)}
         onPageChange={(page: number) => setCurrentPage(page)}

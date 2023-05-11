@@ -1,13 +1,12 @@
 import { useState } from "react";
 
 interface IPaginationProps {
-  active?: number;
   currentPage: number;
   onPageChange: (page: number) => void;
   totalPages: number;
 }
 
-const Pagination = ({ active, currentPage, onPageChange, totalPages }: IPaginationProps) => {
+const Pagination = ({ currentPage, onPageChange, totalPages }: IPaginationProps) => {
   const [activePage, setActivePage] = useState(currentPage);
 
   const previousPage = () => {

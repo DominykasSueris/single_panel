@@ -54,7 +54,6 @@ const AwsLogs = () => {
         resourceName="log"
       />
       <Pagination
-        active={page}
         currentPage={page}
         onPageChange={(page: number) => setPage(page)}
         totalPages={getNumberOfPages(logs)}

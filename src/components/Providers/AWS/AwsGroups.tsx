@@ -47,7 +47,6 @@ const AwsGroups = () => {
         resourceName="group"
       />
       <Pagination
-        active={currentPage}
         totalPages={getNumberOfPages(groups)}
         currentPage={currentPage}
         onPageChange={(page: number) => setCurrentPage(page)}
