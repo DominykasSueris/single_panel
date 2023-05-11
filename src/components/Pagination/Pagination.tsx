@@ -49,14 +49,14 @@ const Pagination = ({ active, currentPage, onPageChange, totalPages }: IPaginati
   return (
     <nav aria-label="Logs navigation">
       <ul className="pagination">
-        <li className="page-item">
+        <li className={`${currentPage === 1 ? "page-item disabled" : "page-item"}`}>
           <a className="page-link" href="#" aria-label="Previous" onClick={() => previousPage()}>
             <span aria-hidden="true">&laquo;</span>
             <span className="sr-only">Previous</span>
           </a>
         </li>
         {renderPages()}
-        <li className="page-item">
+        <li className={`${currentPage === totalPages ? "page-item disabled" : "page-item"}`}>
           <a className="page-link" href="#" aria-label="Next" onClick={() => nextPage()}>
             <span aria-hidden="true">&raquo;</span>
             <span className="sr-only">Next</span>
