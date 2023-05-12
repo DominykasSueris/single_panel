@@ -15,9 +15,11 @@ export const AuthContext = createContext<AuthContextProperties>({} as AuthContex
 const AwsAuth = () => {
   const [sessions, setSessions] = useState<Session[]>(AuthSessions.getConnections());
 
+  const hasConnections = sessions.length > 0;
+
   const addSession = (session: Session) => {
     AuthSessions.updateConnections(session);
-    sessions.push(session);
+    setSessions([...sessions, session]);
   };
 
   const deleteSession = (tag: string) => {
@@ -41,7 +43,7 @@ const AwsAuth = () => {
     <AuthContext.Provider
       value={{ sessions: sessions, addSession: addSession, deleteSession: deleteSession }}
     >
-      {sessions ? <Outlet></Outlet> : <Login />}
+      {hasConnections ? <Outlet></Outlet> : <Login />}
     </AuthContext.Provider>
   );
 };
