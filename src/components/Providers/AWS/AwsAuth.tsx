@@ -14,19 +14,18 @@ export const AuthContext = createContext<AuthContextProperties>({} as AuthContex
 
 const AwsAuth = () => {
   const [sessions, setSessions] = useState<Session[]>(AuthSessions.getConnections());
-  const [hasActiveConnections, setActiveConnections] = useState<boolean>(false);
+
+  const hasConnections = sessions.length > 0;
 
   const addSession = (session: Session) => {
     AuthSessions.updateConnections(session);
-    sessions.push(session);
-    setActiveConnections(true);
+    setSessions([...sessions, session]);
   };
 
   const deleteSession = (tag: string) => {
     const remainingConnections = sessions.filter(session => session.tag !== tag);
     AuthSessions.deleteConnections(tag);
     setSessions(remainingConnections);
-    if (remainingConnections.length === 0) setActiveConnections(false);
   };
 
   const syncClients = async () => {
@@ -44,7 +43,7 @@ const AwsAuth = () => {
     <AuthContext.Provider
       value={{ sessions: sessions, addSession: addSession, deleteSession: deleteSession }}
     >
-      {hasActiveConnections ? <Outlet></Outlet> : <Login />}
+      {hasConnections ? <Outlet></Outlet> : <Login />}
     </AuthContext.Provider>
   );
 };
