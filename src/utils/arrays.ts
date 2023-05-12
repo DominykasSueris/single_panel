@@ -1,4 +1,4 @@
-export const PerPage = 6;
+export const PerPage = 50;
 
 /**
  *
