@@ -31,7 +31,7 @@ const AwsAuth = () => {
   const syncClients = async () => {
     const connections = AuthSessions.getConnections();
     for (const connection of connections) {
-      await configClient(connection.key, connection.secret, connection.authTarget);
+      await configClient(connection.key, connection.secret, connection.authRegion);
     }
   };
 
