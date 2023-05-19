@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 /** Cloud Services */
 import { CloudWatch } from "services/aws/aws";
@@ -14,7 +14,7 @@ import Table from "components/Table/Table";
 import AwsLogsRow from "components/Table/AwsTableRows/AwsLogsRow";
 
 /** Utils */
-import { getNumberOfPages, PerPage } from "utils/arrays";
+import { getNumberOfPages, sliceArray } from "utils/arrays";
 import { useCloudWatch, useQuery } from "utils/hooks";
 
 const AwsLogs = () => {
@@ -28,14 +28,9 @@ const AwsLogs = () => {
   } = useCloudWatch<IAwsLogs>(CloudWatch.logs([{ group: groupName }]));
 
   const filterByStreamName = (streamName: string) => {
-    return logs.filter(log => log.logStreamName.includes(streamName));
+    const result = logs.filter(log => log.logStreamName.includes(streamName));
+    return sliceArray(result, page);
   };
-
-  const currentTableData = useMemo(() => {
-    const firstPageIndex = (page - 1) * PerPage;
-    const lastPageIndex = firstPageIndex + PerPage;
-    return filterByStreamName(filterQuery).slice(firstPageIndex, lastPageIndex);
-  }, [page, filterQuery]);
 
   if (error) return <AlertError />;
 
@@ -50,7 +45,7 @@ const AwsLogs = () => {
       <Table
         headers={["Log stream name", "Message", "Timestamp"]}
         itemComponent={AwsLogsRow}
-        items={currentTableData}
+        items={filterByStreamName(filterQuery)}
         resourceName="log"
       />
       <Pagination
